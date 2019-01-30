@@ -19,11 +19,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.ibm.websphere</groupId>
-			<artifactId>java-ee-apis</artifactId>
-			<version>6.0</version>
+      <groupId>net.wasdev.maven.tools.targets</groupId>
+      <artifactId>java-specs</artifactId>
+      <version>1.0</version>
+      <type>pom</type>
 			<scope>provided</scope>
-		</dependency>
+    </dependency>
 	</dependencies>
 
 	<build>
