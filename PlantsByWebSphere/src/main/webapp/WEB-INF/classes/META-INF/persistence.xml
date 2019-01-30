@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="PBW">
+		<jta-data-source>jdbc/PlantsByWebSphereMariaDBDataSource</jta-data-source>
+		<non-jta-data-source>jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA</non-jta-data-source>
+		<properties>
+			<!-- Ensures the DB schema is kept in sync with the JPA entity classes as they are developed - - >
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+			-->
+		</properties>
+	</persistence-unit>
+</persistence>

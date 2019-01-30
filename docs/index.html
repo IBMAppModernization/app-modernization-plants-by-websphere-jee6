@@ -1,0 +1,479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!-- 
+"This sample program is provided AS IS and may be used, executed, copied and modified without royalty payment by customer (a) for its own 
+instruction and study, (b) in order to develop applications designed to run with an IBM WebSphere product, either for customer's own internal use 
+or for redistribution by customer, as part of such an application, in customer's own products."
+
+Product 5630-A36,  (C) COPYRIGHT International Business Machines Corp., 2001, 2004
+All Rights Reserved * Licensed Materials - Property of IBM
+-->
+
+<HTML>
+
+<HEAD>
+<meta http-equiv="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<TITLE>Plants By WebSphere Sample Introduction</TITLE>
+<LINK REL=StyleSheet HREF="theme/SamplesMaster.css" TYPE="text/css"
+	MEDIA=screen>
+</HEAD>
+
+<BODY class="sampcont">
+	<h1 class="samp">
+		<img src="images/pbw_main.gif"
+			width="33" height="28" border="0" alt="">Plants By WebSphere
+	</h1>
+	<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=5>
+		<tr>
+			<td align="left" valign="top" class="sampnav">
+				<p><a class="submenu" href="#Overview"><b>Overview</b></a></p>
+				<p><a class="submenu" href="#Getting_Started"><b>Getting Started</b></a></p>
+				<p><a class="submenu" href="#Development_and_Build"><b>Development and Build</b></a></p>
+				<p><a class="submenu" href="#Application_Install"><b>Application Install and Management</b></a></p>
+				<p><a class="submenu" href="#Run_the_Application"><b>Run the Application</b></a></p>
+				<p><a class="submenu" href="techNotes.html"><b>Technotes</b></a></p>
+				<p><a class="submenu" href="../target/site/apidocs/index.html" target="_blank"><b>Javadoc</b></a>
+			</td>
+			<td align="LEFT" valign="TOP">
+				<h2>
+					<a name="Overview">Overview</a>
+				</h2>
+				<p>Plants by WebSphere is an Internet storefront application that
+					specializes in the sale of plants and gardening tools. Using the
+					Plants by WebSphere store front, customers can open accounts,
+					browse for items to purchase, view product details, and place
+					orders.</p>
+				<p>This sample is designed using a typical Java EE web
+					Model-View-Controller (MVC) pattern. The MVC pattern provides
+					separation of concerns for persistent data, presentation of
+					information, and the control logic that is used to tie them
+					together. The sample has been updated to utilize the following
+					technologies:</p>
+				<ul>
+					<li>For the presentation tier, Plants By WebSphere uses a
+						combination of JSF 2.0 and Facelets.</li>
+					<li>The controllers are a combination of Managed Beans and EJB
+						session beans.</li>
+					<li>The model portion is generally handled by JPA, though some
+						presentation side wrapping is done to provide additional
+						presentation support. A Derby database provides persistence for a
+						catalog, inventory of items, order handling, as well as a simple
+						user registry.</li>
+					<li>All of the above is tied together using CDI.</li>
+				</ul>
+				<p>One interesting point to note is that now it is no longer
+					necessary to physically separate all these things into different
+					modules. You can create controllers as Managed Beans and package
+					them in your WAR files and as your needs grow to include
+					transactions and security, you can add EJB annotations to those
+					Managed Beans and still access them directly from JSF without
+					having to repackage your application or refactor your code.</p>
+				
+				<h2>
+					<a name="Getting_Started" class="sampnav">Getting started</a>
+				</h2>
+
+				<p>
+					It is recommended that you copy the
+					<samp>
+						<var>install_root</var>/samples
+					</samp>
+					directory to your own work area and use it for any samples
+					development. This will prevent any changes you are making to the
+					samples from being overwritten when service updates are applied.
+					Any references to directory locations used in this document will
+					use the installed sample location for clarity only.
+				</p>
+
+				<p>
+					<img src="images/takeNote.gif"
+						width="13" height="13" border="0" alt="Important Information">
+					&nbsp;The instructions assume the application will be built on a
+					Linux system. Small variations in the commands may exist on Windows
+					systems.
+				</p>
+
+				
+				<h2>
+					<a name="Development_and_Build">Development and Build</a>
+				</h2>
+				<p>The sample comes with a pre-built version of the Plants By
+					WebSphere application, which can be found in the following
+					directory:</p>
+				<p>
+					<samp>
+						<samp>
+							<var>install_root</var>/samples/PlantsByWebSphere/pbw-ear/target
+						</samp>
+					</samp>
+				</p>
+				<p>If you want to jump ahead and try it out, see the <a
+				href="#Application_Install">Application Install</a> section.</p>
+				<p>
+					The sample was developed using Rational Application Developer
+					(RAD), but the build environment has been setup to use <a
+						href="http://maven.apache.org/">Apache Maven</a>. The sample can
+					be used for further develop and test either as is or imported into a set of projects in Rational
+					Application Developer.
+				</p>
+				<p>
+					If you want to use both RAD and Maven together, you should obtain
+					and read the <a
+						href="http://www.ibm.com/developerworks/wikis/download/attachments/113607155/RAD_755_MAVEN_0601.pdf?version=1">Java
+						EE Development using Rational Application Developer 7.5.5 and
+						Maven</a> white paper. The rest of this document will assume the
+					exclusive use of Maven as a build environment and a basic text
+					editor for changing files.
+				</p>
+				<h3>
+					<a name="Identifying_the_directory_structure" class="sampnav">Identifying
+						the directory structure</a>
+				</h3>
+				<p>The directory structure of the sample follows the guidlines
+					for building Java EE applications using Maven:</p> <br>
+
+				<table width="100%" border="1" cellspacing="0" cellpadding="3">
+					<tbody>
+						<tr>
+							<td class="sampnav"><samp>
+									<var>install_root</var>/samples/PlantsByWebSphere
+								</samp></td>
+							<td class="sampnav">Contains the Sample source code for the
+								Plants by WebSphere sample and is organized as a heirarchy of
+								Maven projects. Source is generally found in the <samp>src</samp>
+								subdirectory of each Maven project.</td>
+						</tr>
+						<tr>
+							<td class="sampnav"><samp>
+									<var>install_root</var>/samples/PlantsByWebSphere/target/site/apidocs
+								</samp></td>
+							<td class="sampnav">Contains the Javadoc documentation for
+								the sample. This directory is created during the Plants by
+								WebSphere sample maven build.</td>
+						</tr>
+						<tr>
+							<td class="sampnav"><samp>
+									<var>install_root</var>/samples/PlantsByWebSphere/.../target
+								</samp></td>
+							<td class="sampnav">The target directory contains the build
+								generated files. Each maven sub-project will build a portion of
+								the sample, typically a module. The pbw-ear project assembles
+								the modules and builds an EAR file. The parent project provides
+								overall project definition and handles the build of javadoc.</td>
+						</tr>
+					</tbody>
+				</table>
+				<h3>Prerequisites</h3>
+				<p>
+					You will need to obtain and install Maven 2.2 or later prior to
+					building the sample. See <a
+						href="http://maven.apache.org/index.html">http://maven.apache.org/index.html</a>
+					for more information about Maven.
+				</p><h4>Using Java 7</h4>
+				<p>By default, Java 6 will be used to build and run
+					applications. To utitilize Java 7 for building and running the
+					application, setup the profile and Maven to use Java 7. This requires prior
+					installation of the Java 7 extension for WebSphere. The following
+					command may be used to determine what choices are available for SDK
+					selection:</p>
+				<p>
+					<samp>
+						<i>install_root</i>/bin/managesdk -listAvailable
+					</samp>
+				</p><p>Use the appropriate Java version and bit architecture for your system when selecting the Java SDK to use.</p>
+				<p>
+					There are two ways to enable a profile to utilize Java 7. Typically a profile will already exist. The following example commands describe how
+					to enable the AppSrv01 profile to use 32 bit Java 7 (add
+					<samp>
+						-user <i>name</i></samp>
+					and
+					<samp>
+						-password <i>text</i></samp>
+					parameters if the profile has admin security
+					enabled):
+				</p>
+				<ul>
+					<li><samp>managesdk -enableProfile -sdkName 1.7_32
+							-profileName AppSrv01 -enableServers</samp>
+					</li><li><samp>managesdk -setCommandDefault -sdkName 1.7_32</samp>
+					</li>
+				</ul>
+				<p>If
+					no profile exists yet, run the following before creating the
+					profile:</p>
+				<ul><li><samp>managedsdk -setNewProfileDefault -sdkName
+							1.7_32</samp>
+					</li><li><samp>managesdk -setCommandDefault -sdkName 1.7_32</samp>
+					</li>
+				</ul><p>
+					Edit the
+					<samp>
+						<i>install_root</i>/samples/PlantsByWebSphere/pom.xml
+					</samp>
+					file and set the
+					<samp>&lt;source&gt;</samp>
+					and
+					<samp>&lt;target&gt;</samp>
+					values to 1.7.
+				</p><h4>Environment setup</h4>
+				<p>
+					The POM files for the Plants by WebSphere project assume several
+					things:<br>
+				</p>
+				<ul>
+					<li>The <samp>WAS_HOME</samp> environment variable has been
+						set to the install location of the WebSphere Application Server.</li><li>The <samp>JAVA_HOME</samp>
+						environment variable has been
+						set to the install location of the preferred Java SDK.</li>
+					<li>The Java EE API jar has been added to a local maven
+						repository for use during the maven build.</li>
+				</ul> 
+				<p>Set <samp>WAS_HOME</samp> and
+					<samp>JAVA_HOME</samp>
+					by executing <samp>
+					<i>install_root</i>/bin/setupCmdLine</samp>. Be sure to add the Java SDK
+					<samp>bin</samp>
+					directory to the
+					<samp>PATH</samp>
+					as well.</p>
+				<p>Lastly, add the Java EE API jar to the local
+				maven repository by running the following command (be sure the Maven
+					<samp>bin</samp>
+					directory is on your
+					<samp>PATH</samp>
+					):</p>
+				
+					<samp>mvn install:install-file
+						-Dfile=$WAS_HOME/dev/JavaEE/j2ee.jar -DgroupId=com.ibm.websphere
+						-DartifactId=java-ee-apis -Dversion=6.0 -Dpackaging=jar
+						-DgeneratePom=true</samp>
+				
+
+
+				<h3>
+					<a name="Building_the_sample" class="sampnav">Building the
+						sample</a>
+				</h3>
+
+				<p>
+					To rebuild this sample, verify that
+					<samp>
+						<i>profile_root</i>/bin
+					</samp>
+					is in your PATH environment variable. Follow these steps to rebuild
+					the sample:<br>
+				</p>
+				<ol>
+					<li>At the command line, change to the <samp>
+							<var>install_root</var>/samples/PlantsByWebSphere
+						</samp> directory.</li>
+					<li>Run maven:</li>
+
+					
+						<samp>mvn install site</samp>
+					
+
+				</ol>
+				<p>
+					<br>This will compile the Java code, package the modules,
+					package the ear, and create the Javadoc. The ear file will be located in the
+					<samp>pbw-ear/target</samp>
+					directory and the Javadoc will be located in the
+					<samp>
+						<var> </var>
+						target/site/apidocs
+					</samp>
+					directory.
+				</p>
+				<h3>
+					<a name="execute" class="sampnav"> </a>
+				</h3>
+				<h2>
+					<a name="Application_Install">Application Install and
+						Management</a>
+				</h2>
+				<p>WebSphere provides multiple ways to install an application.
+					In addition to the typical console and scripting styles, a new
+					style focused on supporting application development with batch
+					build environments has been added called monitored directory
+					deployment. This document will focus on that style of deployment.</p>
+				<p>Monitored directory deployment allows a developer to install
+					an application on an application server and start it
+					simply by copying  the application to a directory. The application is uninstalled
+					by removing the file from the monitored directory.</p>
+				<h3>Prerequisites</h3>
+				<p>
+					There are three aspects that must be addressed when using monitored
+					directory deployment:<br>
+				</p>
+				<ul>
+					<li>ensuring that necessary resources are available</li>
+					<li>ensuring that necessary resources are configured</li>
+					<li>enabling the monitored directory deployment service</li>
+				</ul>
+				<p>
+					<br>The Plants By WebSphere sample uses a Derby database,
+					which must be setup before running the application. The application
+					assumes the Derby database will be installed in
+					<samp>
+						<i>install_root</i>/Derby/databases.
+					</samp>
+					Use the following commands to setup the Derby database before
+					installing and running the Plants by WebSphere sample application:
+				
+				<div id="Win_011" style="display: block">
+					<dl>
+						<dd>
+							<samp>
+								cd <i>install_root</i>/Derby/databases
+							</samp>
+						</dd>
+						<dd>
+							<samp>jar xf ../../samples/PlantsByWebSphere/Derby/PLANTSDB/pbw-db.jar</samp>
+						</dd>
+					</dl>
+				</div><p>On systems where the person installing the Derby database and the person using the sample are not the same, some adjustment of the permissions of the extracted files may need to be made. Make sure the appropriate read and write permissions are set by either changing the owner of the files or setting group read and write permissions.</p><p>The
+					Plants By WebSphere sample uses an enhanced EAR to capture the
+					deployment configuration information for the EAR. This information
+					creates the resources required by the application to access the
+					Derby database as well as a resource for a mail provider. The mail
+					provider resource is a dummy mail provider that will attempt to
+					send mail to a fictitous SMTP server.</p>
+				<p>
+					The enhanced EAR data was configured using RAD and saved as part of
+					the EAR file metadata in the
+					<samp>pbw-ear</samp>
+					sub-project. If you want to change the location of the Derby
+					database, you will also need to update the resource configuration
+					within the enhanced EAR metadata and rebuild the sample.
+				</p>
+				<p>
+				<p>Applications may be installed in WebSphere by copying the EAR
+					file to a well known location and can be uninstalled by removing
+					the EAR file from that location. However, this is not turned on by
+					default. Monitoring may be turned on by using the following
+					command:</p>
+				<p></p>
+				<ol>
+					<li>In the Integrated Solutions Console, click <strong>Applications
+							&gt; Global deployment settings</strong>.</li>
+					<li>Click the check box to Monitor directory to automatically
+						deploy applications. Note: remember the directory location used
+						here.</li>
+					<li>Apply the settings, Save your changes, and restart the
+						server.</li>
+				</ol>
+				<p>Once this is complete, the Plants by WebSphere application
+					may be installed by copying it to the directory location specified
+					in the Global deployment settings panel.</p>
+				<p>
+					<img src="images/takeNote.gif"
+						width="13" height="13" border="0" alt="Important Information">
+					&nbsp;The monitored directory location listed in the console is
+					only the root of a collection of monitored directories. Each server
+					will have a unique sub-directory location that is used under that
+					root directory.
+				</p>
+				
+				<p>
+				<h3>
+					<a name="3" class="sampnav">Installing the Plants by WebSphere
+						sample application</a>
+				</h3>
+				<p>The Plants by WebSphere application may be installed by
+					copying it to the directory location specified in the Global
+					deployment settings panel. The following example assumes typical
+					profile and server names, but may need to be modified for your
+					particular case:</p>
+				<div id="Win_012" style="display: block">
+					<dl>
+						<dd>
+							<samp>
+								cd <i>install_root</i>/samples/PlantsByWebSphere/pbw-ear
+							</samp>
+						</dd>
+						<dd>
+							<samp>
+								cp target/pbw-ear.ear <i>install_root</i>/profiles/<i>AppSrv01</i>/monitoredDeployableApps/servers/<i>server1</i>
+							</samp>
+						</dd>
+					</dl>
+				</div>
+				<p>To uninstall the Plants by WebSphere application, just delete
+					the EAR file from the monitored directory location.</p>
+				<p>A developer will typically keep an eye on the log file to
+					understand when application deployment has completed and watch for
+					errors. If you are not using an IDE, such as RAD, that monitors the
+					log, you can use:</p>
+				<dl>
+					<dt>
+						<samp>
+							tail -f <i>install_root</i>/profiles/<i>AppSrv01</i>/logs/<i>server1</i>/SystemOut.log
+						</samp>
+					</dt>
+				</dl>
+				<p>When the application install completes, a log message that is
+					similar to the following should be visible:</p>
+				<dl>
+					<dt>
+						<samp>[2/5/11 8:59:28:765 CST] 0000001c AppManagement I
+							CWLDD0021I: Event id 1794713772-1. Application pbw-ear is started
+							on:
+							WebSphere:cell=stutzNode01Cell,node=stutzNode01,server=server1,status=success.</samp>
+					</dt>
+				</dl>
+				<p>
+				<h3>
+					<a name="2" class="sampnav">Configuring mail resources
+						(optional)</a>
+				</h3>
+
+				<p>The Plants by WebSphere application makes extensive use of
+					annotations for describing metdata about application requirements.
+					While this, in general, can improve developer productivity, it can
+					have some drawbacks. Components that use resource injection require
+					that the resource be defined and references bound to it in order to
+					resolve injection during component startup. This is true, even if
+					the component may not use the resource in a scenario. For example,
+					if a developer is working on updating the UI page flows, they
+					probably don't care exercise the logic for sending an email message
+					for order processing. However, the injected resource chain
+					(ShoppingServlet &gt; MailerBean &gt; mail Session) would require
+					that a mail provider be configured.</p>
+				<p>
+					A fictitous mail provider for the Plants by WebSphere Sample has
+					already been included in the enhanced EAR. If you do not want to
+					send an order confirmation e-mail, skip this section. The following
+					steps describe how to update the enhanced
+					EAR's mail resource:<br>
+				</p>
+				<ol>
+					<li>Edit the file <samp><i>install_root</i>/samples/PlantsByWebSphere/pbw-ear/src/main/application/META-INF/ibmconfig/cells/defaultCell/applications/defaultApp/deployments/defaultApp/resources.xml</samp></li><li>Find the text <samp>mailTransportHost=&quot;somehost.com&quot;</samp>
+						and change it to a valid SMTP server host.</li><li>Rebuild the application as described above</li>
+				</ol><h2>
+					<a name="Run_the_Application">Run the Application</a>
+				</h2>
+				<p>To run the application, click the following link:<br/>
+				<dl>
+					<dt>
+						<samp><samp>
+								<a
+									href="&lt;samp&gt;&lt;samp&gt;http://localhost:9080/PlantsByWebSphere&lt;/samp&gt;&lt;/samp&gt;">http://localhost:9080/PlantsByWebSphere</a>
+							</samp></samp>
+						</dt>
+					</dl>
+				<p>Note the link assumes that the application has been installed on a
+					local server with the typical HTTP port and the WebSphere
+					environment has been appropriately configured. If your installation
+					is not local or does not use the default HTTP ports, you will need
+					to update the URL accordingly.</p>
+			</td>
+		</tr>
+		<!--********* Requirements **************-->
+		<!--************  Plants By WebSphere  ********************-->
+	</TABLE>
+	
+
+</BODY>
+</HTML>

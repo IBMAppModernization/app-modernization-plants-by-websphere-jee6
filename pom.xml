@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.websphere.pbw</groupId>
+	<version>8.0</version>
+	<artifactId>pbw-sample</artifactId>
+	<packaging>pom</packaging>
+	
+	<name>PlantsByWebSphere sample</name>
+	
+	<modules>
+		<module>pbw-lib</module>
+		<module>PlantsByWebSphere</module>
+		<module>pbw-ear</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<target>1.6</target>
+					<source>1.6</source>
+					<compilerArguments>
+						<endorseddirs>${WAS_HOME}/endorsed_apis</endorseddirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<doctitle>PlantsByWebSphere Sample Application</doctitle>
+				</configuration>
+				<executions>
+					<execution>
+						<id>aggregate</id>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

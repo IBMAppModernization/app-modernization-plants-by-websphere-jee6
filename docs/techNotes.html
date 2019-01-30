@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!--
+"This sample program is provided AS IS and may be used, executed, copied and modified without royalty payment by customer (a) for its own
+instruction and study, (b) in order to develop applications designed to run with an IBM WebSphere product, either for customer's own internal use
+or for redistribution by customer, as part of such an application, in customer's own products."
+
+Product 5630-A36,  (C) COPYRIGHT International Business Machines Corp., 2001, 2008
+All Rights Reserved * Licensed Materials - Property of IBM
+-->
+
+<HTML>
+
+<HEAD>
+<meta http-equiv="Content-Type" CONTENT="text/html; charset=utf-8">
+<LINK REL=StyleSheet HREF="theme/SamplesMaster.css" TYPE="text/css"
+	MEDIA=screen>
+
+<TITLE>Plants By WebSphere Sample TechNotes</TITLE>
+
+</HEAD>
+
+<BODY class="sampcont">
+	<h1 class="samp">
+		<img src="images/pbw_main.gif"
+			width="33" height="28" border="0" alt="">Plants By WebSphere
+		Technotes
+	</h1>
+	<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=5>
+		<tr>
+			<td align="left" valign="top" class="sampnav">
+				<p>
+					<a class="submenu" href="index.html#Overview"><b>Overview</b>
+					</a>
+				</p>
+				<p>
+					<a class="submenu" href="index.html#Getting_Started"><b>Getting
+							Started</b>
+					</a>
+				</p>
+				<p>
+					<a class="submenu" href="index.html#Development_and_Build"><b>Development
+							and Build</b>
+					</a>
+				</p>
+				<p>
+					<a class="submenu" href="index.html#Application_Install"><b>Application
+							Install and Management</b>
+					</a>
+				</p>
+				<p>
+					<a class="submenu" href="index.html#Run_the_Application"><b>Run
+							the Application</b>
+					</a>
+				</p>
+				<p>
+					<b>Technotes</b>
+				</p>
+				<p>
+					<a class="submenu" href="../target/site/apidocs/index.html"
+						target="_blank"><b>Javadoc</b>
+					</a>
+			</td>
+			<td align="LEFT" valign="TOP">
+				<h2>
+					<a name="gettingstarted" class="sampnav">Getting started</a>
+				</h2>
+				<ul></ul>
+				<p>
+					You can create a unique e-mail address and password for the Plants
+					by WebSphere Sample by clicking <strong>register for your
+						own account here</strong> on the Login page. In addition, a default e-mail
+					address and password exist for the Plants by WebSphere Sample that
+					is presented in the following table:
+				</p> <br>
+				<table border="1" cellpadding="3" cellspacing="0">
+					<tr>
+						<td class="sampnav"><strong>E-mail address</strong>
+						</td>
+						<td class="sampnav">plants@plantsbywebsphere.ibm.com</td>
+					</tr>
+					<tr>
+						<td class="sampnav"><strong>Password</strong>
+						</td>
+						<td class="sampnav">plants</td>
+					</tr>
+				</table> <!---************ DATABASE TABLES  **************-->
+				<h2>
+					<a name="dbtables" class="sampnav">Locating database tables</a>
+				</h2>
+				<p>
+					The database tables for this Sample are CUSTOMER, INVENTORY,
+					ORDERINFO, ORDERITEM, IDGENERATOR, BACKORDER, and SUPPLIER. These
+					tables are found in the PLANTSDB database. The PLANTSDB database is
+					located in the
+					<samp>
+						<i>install_root</i>/Derby/
+						<var>databases</var>
+						/PLANTSDB
+					</samp>
+					directory.
+				</p>
+
+				<p>View the table layout in the following SQL statements:</p> <br>
+				<table border="0">
+					<tr>
+						<td><pre>
+	CREATE TABLE CUSTOMER
+  	 (  CUSTOMERID VARCHAR(250) NOT NULL,
+   	 PASSWORD VARCHAR(250),
+   	 FIRSTNAME VARCHAR(250),
+   	 LASTNAME VARCHAR(250),
+   	 ADDR1 VARCHAR(250),
+   	 ADDR2 VARCHAR(250),
+   	 ADDRCITY VARCHAR(250),
+   	 ADDRSTATE VARCHAR(250),
+   	 ADDRZIP VARCHAR(250),
+   	 PHONE VARCHAR(250));
+<br>
+
+	ALTER TABLE CUSTOMER
+  	    ADD CONSTRAINT PK_CUSTOMER PRIMARY KEY (CUSTOMERID);
+
+	CREATE TABLE INVENTORY
+  	 (  INVENTORYID VARCHAR(250) NOT NULL,
+   	 NAME VARCHAR(250),
+   	 HEADING VARCHAR(250),
+   	 DESCRIPTION VARCHAR(250),
+   	 PKGINFO VARCHAR(250),
+   	 IMAGE VARCHAR(250),
+       IMGBYTES LONG BIT VARYING,
+   	 PRICE REAL,
+   	 COST REAL,
+       CATEGORY INTEGER,
+   	 QUANTITY INTEGER,
+	    NOTES VARCHAR(250),
+   	 ISPUBLIC INTEGER,
+       MINTHRESHOLD INTEGER NOT NULL,
+       MAXTHRESHOLD INTEGER NOT NULL);
+
+	ALTER TABLE INVENTORY
+  	    ADD CONSTRAINT PK_INVENTORY PRIMARY KEY (INVENTORYID);
+
+   CREATE TABLE ORDER1
+    (  ORDERID VARCHAR(250) NOT NULL,
+       SELLDATE VARCHAR(250),
+       BILLNAME VARCHAR(250),
+       BILLADDR1 VARCHAR(250),
+       BILLADDR2 VARCHAR(250),
+       BILLCITY VARCHAR(250),
+       BILLSTATE VARCHAR(250),
+       BILLZIP VARCHAR(250),
+       BILLPHONE VARCHAR(250),
+       SHIPNAME VARCHAR(250),
+       SHIPADDR1 VARCHAR(250),
+       SHIPADDR2 VARCHAR(250),
+       SHIPCITY VARCHAR(250),
+       SHIPSTATE VARCHAR(250),
+       SHIPZIP VARCHAR(250),
+       SHIPPHONE VARCHAR(250),
+       CREDITCARD VARCHAR(250),
+       CCNUM VARCHAR(250),
+       CCEXPIREMONTH VARCHAR(250),
+       CCEXPIREYEAR VARCHAR(250),
+       CARDHOLDER VARCHAR(250),
+       SHIPPINGMETHOD INTEGER NOT NULL,
+       PROFIT REAL NOT NULL,
+       CUSTOMERID VARCHAR(250));
+
+   ALTER TABLE ORDER1
+       ADD CONSTRAINT PK_ORDER1 PRIMARY KEY (ORDERID);
+
+   CREATE TABLE ORDERITEM
+    (  INVENTORYID VARCHAR(250) NOT NULL,
+       NAME VARCHAR(250),
+       PKGINFO VARCHAR(250),
+       PRICE REAL NOT NULL,
+       COST REAL NOT NULL,
+       CATEGORY INTEGER NOT NULL,
+       QUANTITY INTEGER NOT NULL,
+       SELLDATE VARCHAR(250),
+       ORDER_ORDERID VARCHAR(250) NOT NULL);
+
+   ALTER TABLE ORDERITEM
+       ADD CONSTRAINT PK_ORDERITEM PRIMARY KEY (INVENTORYID, ORDER_ORDERID);
+
+   CREATE TABLE IDGENERATOR
+    (  IDNAME VARCHAR(250) NOT NULL,
+       IDVALUE INTEGER NOT NULL);
+
+   ALTER TABLE IDGENERATOR
+       ADD CONSTRAINT PK_IDGENERATOR PRIMARY KEY (IDNAME);
+
+   CREATE TABLE BACKORDER
+    (  BACKORDERID VARCHAR(250) NOT NULL,
+       INVENTORYID VARCHAR(250),
+       QUANTITY INTEGER NOT NULL,
+       STATUS VARCHAR(250),
+       LOWDATE BIGINT NOT NULL,
+       ORDERDATE BIGINT NOT NULL,
+       SUPPLIERORDERID VARCHAR(250) NULL);
+
+   ALTER TABLE BACKORDER
+       ADD CONSTRAINT PK_BACKORDER PRIMARY KEY (BACKORDERID);
+
+   CREATE TABLE SUPPLIER
+    (  SUPPLIERID VARCHAR(250) NOT NULL,
+       NAME VARCHAR(250),
+       STREET VARCHAR(250),
+       CITY VARCHAR(250),
+       USSTATE VARCHAR(250),
+       ZIP VARCHAR(250),
+       PHONE VARCHAR(250),
+       URL VARCHAR(250));
+
+   ALTER TABLE SUPPLIER
+       ADD CONSTRAINT PK_SUPPLIER PRIMARY KEY (SUPPLIERID);
+
+</pre></td>
+					</tr>
+				</table> <!--*********** SOURCE CODE LOCATION  *************-->
+				<H2>
+					<a name="source" class="sampnav"></a>
+				</H2>
+				<h2>
+					<a name="coding" class="sampnav">Reviewing coding notes</a>
+				</h2>
+				<table border="0" cellspacing="0" cellpadding="1">
+					<tr>
+						<td class="sampnav"><a href="#overview">Overview</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="sampnav"><a href="#servlets">Servlets</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="sampnav"><a href="#enterprisebeans">Enterprise
+								beans</a>
+						</td>
+					</tr>
+				</table>
+				<h3>
+					<a name="overview" class="sampnav">Overview</a>
+				</h3>
+				<p>The Plants by WebSphere Sample incorporates the following
+					technologies:</p>
+				<ul>
+					<li>Java Persistence API (JPA) entity beans</li>
+					<li>Stateless session beans</li>
+					<li>Stateful session beans</li>
+					<li>Servlets</li>
+					<li>JavaServer Faces (JSF) files and Facelets</li>
+					<li>Java 2 platform, enterprise edition (J2EE) security</li>
+				</ul>
+				<p>The Plants by WebSphere application is supported through a
+					series of JSF pages and HTML pages. These pages communicate with
+					the following servlets: AccountServlet, ShoppingServlet,
+					ImageServlet, and AdminServlet. The servlets use the various
+					enterprise bean business methods, which in turn, access data from
+					the database as needed.</p>
+
+				<h3>
+					<a name="servlets" class="sampnav">Servlets</a>
+				</h3>
+				<p>The following section provides information on the servlets
+					used in this application.</p>
+				<h4>
+					<a name="shoppingservlet" class="sampnav">ShoppingServlet</a>
+				</h4>
+				<blockquote>
+					<p>The ShoppingServlet servlet processes the majority of
+						interactions between the browser and the enterprise beans. This
+						interaction includes inventory, shopping cart, and order
+						functions. Selecting a shopping category to browse uses a Catalog
+						session bean, to find and display all of the relevant Inventory
+						objects. Displaying the details of an item is also performed using
+						a Catalog session bean to obtain information from an Inventory JPA
+						entity bean.</p>
+					<p>Adding an item to the shopping cart creates a ShoppingCart
+						stateful session bean. A Catalog session bean obtains the
+						Inventory data, and places the item in the ShoppingCart bean.
+						Viewing and updating the shopping cart is done using the
+						ShoppingCart stateful session bean.</p>
+					<p>After entering billing and shipping information, the
+						ShoppingCart bean creates a new Order JPA entity bean. Upon
+						completing the checkout procedure, a MailerBean stateless session
+						bean is created to send a confirmation e-mail, using the JavaMail
+						API.</p>
+				</blockquote>
+				<h4>
+					<a name="imageservlet" class="sampnav">ImageServlet</a>
+				</h4>
+				<blockquote>The ImageServlet servlet obtains and places
+					product images into the database. The servlet obtains images from
+					the JSP pages and the HTML pages from the database and serves back
+					to the browser through the HTTP response.</blockquote>
+
+				<h4>
+					<a name="adminservlet" class="sampnav">AdminServlet</a>
+				</h4>
+				<blockquote>
+					<p>The AdminServlet servlet processes the requests from a user
+						(browser) for database re-population.</p>
+					<p>
+						When processing re-populate requests from the
+						<samp>help.jsp</samp>
+						page, the AdminServlet servlet uses a session bean called
+						ResetDBBean. This bean deletes all database tables and
+						re-populates the tables with initial data values from the
+						<samp>pbw.properties</samp>
+						properties file.
+					</p>
+				</blockquote>
+
+				<h3>
+					<a name="jpabeans" class="sampnav">JPA Entity beans</a>
+				</h3>
+				<p>The following JPA entity beans are used to represent the
+					table information listed above:</p>
+				<h4>Customer</h4>
+				<blockquote>Customer is a JPA entity bean that contains
+					the account data needed for a customer. It is managed by a
+					CustomerMgr session facade.</blockquote>
+				<p>
+					<h4>
+						<a name="inventory0" class="sampnav">Inventory</a>
+					</h4>
+					<blockquote>
+						<p>Inventory is a JPA entity bean. This entity bean contains
+							and manages inventory item data. Methods are available for
+							finding, creating, getting, and setting data fields.</p>
+					</blockquote>
+				<h4>
+					<a name="order" class="sampnav">Order</a>
+				</h4>
+				<blockquote>
+					<p>Order is a JPA entity bean. This bean contains and manages
+						order data.</p>
+				</blockquote>
+				<blockquote>
+					<p>OrderItem is a JPA entity bean that contains
+						and manages a single order item.</p>
+				</blockquote>
+				
+				<h4>BackOrder</h4>
+				<blockquote>The BackOrder JPA entity bean handles restocking requirements as inventory dwindles.</blockquote>
+			
+			<h4>Supplier</h4>
+			<blockquote>The Supplier bean manages a list of suppliers which satisfy BackOrder requests.</blockquote>
+			<h3>
+					<a name="enterprisebeans" class="sampnav">Enterprise beans</a>
+				</h3>
+				<p>The following section provides information on the enterprise
+					beans used in this application.</p>
+				<h4>
+					<a name="catalog" class="sampnav">Catalog</a>Mgr
+				</h4>
+				<blockquote>
+					<p>Catalog is a stateless session bean. It is the primary
+						access to the Inventory JPA entity beans. Stateless session beans
+						generally access entity bean data, while limiting the number of
+						transactions used. The Catalog session bean has business methods
+						to obtain information from one or more Inventory beans. Methods
+						exist to add and remove an Inventory item. The Catalog session
+						bean also has methods to modify existing Inventory beans.</p>
+				</blockquote>
+				<h4>
+					<a name="customer" class="sampnav">Customer</a>Mgr
+				</h4>
+				<blockquote>
+					<p>The CustomerMgr has methods for creating, finding, and
+						updating customer information, as well as verifying a password and
+						getting fields in the Customer entity bean.</p>
+				</blockquote>
+				
+				<h4>
+					<a name="mailer" class="sampnav">Mailer</a>Bean
+				</h4>
+				<blockquote>
+					<p>MailerBean is a stateless session bean used
+						to create and send an order confirmation e-mail using the JavaMail
+						API.</p>
+				</blockquote>
+				<h4>
+					<a name="shoppingcart" class="sampnav">ShoppingCart</a>Bean
+				</h4>
+				<blockquote>
+					<p>ShoppingCart is a stateful session bean. This session bean
+						maintains a list of inventory items to purchase throughout the
+						HTTP session. The ShoppingCart session bean has business methods
+						to add, remove, and update inventory items. The ShoppingCart
+						session bean also has a method to create a new Order JPA entity
+						bean when the customer is ready to complete a purchase.</p>
+				</blockquote>
+
+				<h4>
+					<a name="resetdb" class="sampnav">ResetDB</a>Bean
+				</h4>
+				<blockquote>
+					<p>ResetDBBean is a stateless session bean. This entity bean deletes all
+						rows in the database tables and repopulates the database using a property file.</p>
+				</blockquote></td>
+		</tr>
+	</TABLE>
+</BODY>
+</HTML>

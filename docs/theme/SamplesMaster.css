@@ -1,0 +1,142 @@
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
+/* "This program may be used, executed, copied, modified and distributed without                                                 */  
+
+/* royalty for the purpose of developing, using, marketing, or distributing."                                                    */
+
+/* Product 5724-I63, 5724-H88, 5655-N02, 5733-W70.,  (C) COPYRIGHT International Business Machines Corp., 2000, 2001, 2002, 2006 */
+
+/* All Rights Reserved * Licensed Materials - Property of IBM                                                                    */
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
+<style type="text/css">          
+BODY.banner    { margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 0; padding: 0; width: 100%; }
+TABLE.banner   { margin-top: 0; margin-bottom: 0; margin-left: 0; margin-right: 0; padding: 0; width: 100%; }
+BODY		{ font-size: " + 7.5*multiplier + "pt; background-color: #FFFFFF; font-family: Helvetica, Arial, Verdana, sans-serif; line-height: 1.5em; margin-left: 0px; letter-spacing: .01em; border-left: #cccccc 1px solid; }
+P       { font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em;}
+TD	{ font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; }
+LABEL       { color: #000000; letter-spacing: .02em; font-weight: bold; }
+BODY.sampnav  { color: #000000; background-color: #ffffff; font-size: " + 7.0*multiplier + "pt; border-right: 1px ridge black; margin-right: 0px; }
+TH			{ font-weight: bold; font-size: " + 7.0*multiplier + "pt; color: #000000; background-color: #96D1FF; padding-top: 4px; padding-bottom: 4px; padding-left: 6px; padding-right: 12px; text-align: left; border: 1 solid #333333; }
+B           { font-size: " + 7.5*multiplier + "pt; padding-left: 2px; padding-right: 2px; letter-spacing: .03em; }
+LEGEND { color: #336699; font-weight: bold; font-size: " + 7.5*multiplier + "pt;}
+FIELDSET { border: 1px solid #E7E7E7; width: 80%; margin-left: 1.5em; padding-top: 0; }
+/* classes pertaining to the MENUBAR underneath the banner */
+.top-navigation         { color: #FFFFFF; font-size: " + 7.5*multiplier + "pt; background-color:#6B7A92; padding-left: 10px; padding-right: 5px; }
+.top-nav-item           { color: #ffffff; font-weight:bold; text-decoration: none; font-size: " + .75*multiplier + "em; line-height: 1.5em; }
+a.top-nav-item          { color: #FFFFFF; font-weight:bold; }
+a:active.top-nav-item   { color: #FFFFFF; }
+a:hover.top-nav-item    { text-decoration: underline; }
+
+
+/* classes pertaining to the NAVIGATION TREE in the leftmost frame */
+BODY.sampnav  { color: #000000; background-color: #ffffff; font-size: " + 7.0*multiplier + "pt; border-right: 1px ridge black; margin-right: 0px; }
+TABLE.sampnav { margin-top: 0; margin-left: 0; margin: 0; padding-top: 2px; padding-bottom: 2px; }
+
+TD.sampnav    { font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; color: #000000; }
+H2.sampnav    { font-size: " + 8.0*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; font-weight: bold; margin-bottom: 0; color: #000000}
+H3.sampnav    { font-size: " + 8.0*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; font-weight: bold; margin-bottom: 0;}
+
+/*styles headings in technotes, configrun, buildit & wsadbuildit
+*/
+A.sampnav            { font-size: " + 8.0*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; color: #000000; text-decoration: none; font-size: " + 8.0*multiplier + "pt; }
+A:link.sampnav       { color: #000000; }
+A:visited.sampnav    { color: #000000; }
+A:active.sampnav     { color: #9933cc; }
+A:hover.sampnav      { color: #000000; text-decoration: underline; }
+/* Trademark Properties */
+//This style may not be used anymore
+a.trade	{ font-size: " + 8*multiplier + "pt; }
+				
+/* Header Properties */
+H1.samp { text-align: left; border: #000000 1px solid; FONT-SIZE: " + 7.5*multiplier + "pt; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #5495d5; }
+H1              { font-size: " + 13*multiplier + "pt; font-weight: bold; margin-bottom: 0; }
+H2			    { font-size: " + 8.0*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; font-weight: bold; margin-bottom: 0; }
+H3			    { font-size: " + 8.0*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; font-weight: bold; font-style: italic; margin-bottom: 0; }
+H4			    { font-size: " + 11*multiplier + "pt; font-weight: bold; margin-bottom: 0; }
+H5			    { font-size: " + 11*multiplier + "pt; font-weight: bold; font-style: italic; margin-bottom: 0; }
+
+
+/* Anchor Properties */
+A			    { text-decoration: none; }
+A:link			{ color: #006699; }
+A:visited		{ color: #996699; }
+A:active		{ color: #006699; }
+A:hover			{ color: #006699; text-decoration: underline; }
+		  
+A.submenu           { color: #006699; text-decoration: none; }
+A:link.submenu      { color: #006699; }
+A:visited.submenu   { color: #996699; }
+A:active.submenu    { color: #006699; }
+A:hover.submenu     { text-decoration: underline; color: #006699; }
+ 		
+A.activesubmenu	    { color: #000000; text-decoration:none; font-weight: bold; }
+
+A.title           {	text-decoration: none; color: #ffffff; margin-top: auto; }
+A:link.title	  { color: #ffffff;  }
+A:visited.title   { color: #ffffff;  }
+A:active.title    { color: #ffffff;  }
+A:hover.title	  { color: #ffffff; text-decoration: none; }
+
+A.breadcrumb          { text-decoration: none; color: #666666; margin-top: auto; }
+A:link.breadcrumb	  { color: #666666; }
+A:visited.breadcrumb  { color: #666666; }
+A:active.breadcrumb   { color: #666666; }
+A:hover.breadcrumb    { color: #666666; text-decoration: none; }
+
+
+/* List Properties */
+OL	{ text-align: left; margin-top: 0; margin-bottom: 6px; list-style-type: decimal; }
+OL OL		{ list-style-type: lower-alpha; }
+UL	{ text-align: left; margin-top: 0; margin-bottom: 6px; list-style-type: disc; }
+DL			{ padding: 0; margin: 0; margin-top: 6px; margin-bottom: 6px; margin-left: 23px; list-style-type: none; }
+DT			{ padding: 0; margin: 0; margin-top: 6px; margin-bottom: 6px; list-style-type: none; font-weight: bold; }
+DD			{ padding: 0; margin: 0; margin-top: 6px; margin-bottom: 6px; list-style-type: none; text-indent: 0; }
+LI			{ font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; margin-bottom: 3px; }
+
+
+/* TD Properties */
+TD.breadcrumb    { color: #999999; font-size: " + 8.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; border-bottom: #cccccc 1px solid; }
+TD.sampcont   { color: #000000; font-size: medium; }
+TD.sampnav    { font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; color: #000000; }
+TD.submenu	  { font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; color: #000000; }
+TD.topmenu    { font-size: " + 7.5*multiplier + "pt; text-decoration: none; color: #000000; margin-top: auto; }
+
+
+
+/* Text Area Properties */
+BLOCKQUOTE		{ font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; display: block; margin: 1.17em 0; margin-left: 20px; margin-right: 20px; }
+CAPTION			{ text-align: left; font-style: italic; }
+EM, CITE		{ font-style: italic; }
+SMALL			{ font-size: " + 8*multiplier + "pt; }
+PRE         { font-family: monospace, courier; font-weight: normal; font-size: " + 8.5*multiplier + "pt; color: #000000; white-space: pre; margin-top: 4px; margin-bottom: 4px; }
+VAR			    { font-size: " + 8.0*multiplier + "pt; }
+CODE			{ font-size: " + 8.0*multiplier + "pt; }
+SPAN			{ font-size: " + 10*multiplier + "pt; }
+SPAN.white		{ color: white; }
+BODY.sampcont { margin-top: 10px; margin-bottom : 0px; margin-left : 15px; font-size: " + 7.5*multiplier + "pt; }
+
+
+/* Text Formatting Properties */
+STRONG			{ font-size: " + 7.5*multiplier + "pt; font-family: Verdana, Helvetica, sans-serif; line-height: 1.2em; font-weight: bold; }
+TT			    { font-family: Courier; }
+SAMP        { font-family: monospace, courier; font-weight: normal; font-size: " + 8*multiplier + "pt; color: #000000; }
+SUP			    { vertical-align: super; font-size: " + 8*multiplier + "pt; }
+CENTER			{ text-align: center; }
+.heading1	    { font-size: " + 16*multiplier + "pt; font-weight: bold; line-height: 1.2ex; background-color: #C0C0C0; letter-spacing: normal; text-align: left; width: auto; height: auto; }
+#section        { font-weight: bold; }
+#sample-list    { margin-left: 10px; }
+.afterp         { margin-bottom: 3px; }                          
+LI.gallery      { margin-bottom: 3px; }
+
+
+/* STYLE for Samples HTML Menus */
+TH.pagemenu { font-weight: bold; text-align: center; color: #FFFFFF; background-color: #9999ff; }
+
+
+ /* Tags for Sample's JSP pages */
+H1.sampjsp  { font-size: " + 16*multiplier + "pt; font-weight: bold; line-height: 2ex; }
+
+
+</style>
