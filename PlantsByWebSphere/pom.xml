@@ -21,13 +21,11 @@
 
 	<dependencies>
 		<dependency>
-			<dependency>
 				<groupId>net.wasdev.maven.tools.targets</groupId>
 				<artifactId>java-specs</artifactId>
 				<version>1.0</version>
 				<type>pom</type>
 				<scope>provided</scope>
-			</dependency>
 		</dependency>
 
 		<dependency>
