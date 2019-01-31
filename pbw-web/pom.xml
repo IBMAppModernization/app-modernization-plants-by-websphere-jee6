@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ibm.websphere.pbw</groupId>
-	<artifactId>PlantsByWebSphere</artifactId>
+	<artifactId>pbw-web</artifactId>
 	<version>8.0</version>
 	<packaging>war</packaging>
 
@@ -43,7 +43,7 @@
 				<version>2.1</version>
 				<configuration>
 					<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-					<warName>PlantsByWebSphere</warName>
+					<warName>pbw-web</warName>
 				</configuration>
 			</plugin>
 		</plugins>

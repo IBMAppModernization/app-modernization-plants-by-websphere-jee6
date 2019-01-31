@@ -5,7 +5,7 @@
 	<artifactId>pbw-lib</artifactId>
 	<packaging>jar</packaging>
 	<version>8.0</version>
-	<name>pbw-lib</name>
+	<name>pbw-lib Utility jar</name>
 
 	<parent>
 		<groupId>com.ibm.websphere.pbw</groupId>

@@ -6,12 +6,12 @@
 	<version>8.0</version>
 	<artifactId>pbw-sample</artifactId>
 	<packaging>pom</packaging>
-	
+
 	<name>PlantsByWebSphere sample</name>
-	
+
 	<modules>
 		<module>pbw-lib</module>
-		<module>PlantsByWebSphere</module>
+		<module>pbw-web</module>
 		<module>pbw-ear</module>
 	</modules>
 

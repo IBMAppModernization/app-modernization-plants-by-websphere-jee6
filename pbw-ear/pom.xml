@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.ibm.websphere.pbw</groupId>
-            <artifactId>PlantsByWebSphere</artifactId>
+            <artifactId>pbw-web</artifactId>
             <version>8.0</version>
             <type>war</type>
         </dependency>
@@ -51,8 +51,8 @@
               </jarModule>
               <webModule>
                 <groupId>com.ibm.websphere.pbw</groupId>
-                <artifactId>PlantsByWebSphere</artifactId>
-                <uri>PlantsByWebSphere.war</uri>
+                <artifactId>pbw-web</artifactId>
+                <uri>pbw-web.war</uri>
               </webModule>
             </modules>
         </configuration>
