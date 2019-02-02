@@ -25,6 +25,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Column;
+import javax.persistence.Version;
 
 import com.ibm.websphere.samples.pbw.utils.Util;
 
