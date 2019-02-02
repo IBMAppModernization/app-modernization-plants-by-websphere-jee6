@@ -33,7 +33,7 @@
 
   <build>
     <!--<finalName>pbw-ear</finalName> -->
-    <finalName>plants-by-websphere-jee6-mariadb</finalName>
+    <finalName>plants-by-websphere-jee6-mysql</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

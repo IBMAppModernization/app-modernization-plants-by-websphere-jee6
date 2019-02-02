@@ -23,4 +23,4 @@ RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense \
 
 #BINARIES: Add in all necessary application binaries
 COPY wlp/server.xml /config
-ADD pbw-ear/target/plants-by-websphere-jee6-mariadb.ear /opt/ibm/wlp/usr/servers/defaultServer/apps
+ADD pbw-ear/target/plants-by-websphere-jee6-mysql.ear /opt/ibm/wlp/usr/servers/defaultServer/apps
