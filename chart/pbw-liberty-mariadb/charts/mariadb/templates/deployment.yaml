@@ -37,7 +37,7 @@ spec:
                 name:  {{ .Release.Name }}-{{ .Chart.Name }}-secrets
                 key: maria-db-password
           - name: MYSQL_RANDOM_ROOT_PASSWORD
-            value: yes
+            value: "yes"
           - name: MYSQL_DATABASE
             valueFrom:
               secretKeyRef:
