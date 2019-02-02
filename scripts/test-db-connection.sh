@@ -30,7 +30,7 @@ if [ $HTTP_STATUS -ne 200 ]; then
 fi
 
 # Validate the body
-if [ "$HTTP_BODY" == "Connection successful" ]; then
+if [ "$HTTP_BODY" == "Database connection successful" ]; then
   echo "$HTTP_BODY"
   exit 0
 else
