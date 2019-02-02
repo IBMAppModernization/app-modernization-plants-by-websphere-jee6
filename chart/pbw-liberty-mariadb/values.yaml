@@ -9,10 +9,11 @@ liberty:
     port: "3306"
     user: pbwadmin
     password: l1bertyR0cks
-  k8sNamespace: changeme
   image:
     name: pbw-mysql
     tag: "1.0"
+    registry: "mycluster.icp:8500"
+    namespace: changeme
   resources:
     limits:
       cpu: 300m
