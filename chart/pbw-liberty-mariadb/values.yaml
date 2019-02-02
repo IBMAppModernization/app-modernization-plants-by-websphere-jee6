@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-web:
+liberty:
   enabled: true
   replicaCount: 1
   database:
@@ -22,16 +22,27 @@ web:
       memory: 250Mi
 
 
-ibm-mariadb-dev:
+mariadb:
   enabled: true
   replicaCount: 1
-  persistence:
+  replication:
     enabled: false
-    useDynamicProvisioning: false
-  database:
+  master:
+    persistence:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests:
+        cpu: 500m
+        memory: 250Mi
+  db:
     user: pbwadmin
     password: l1bertyR0cks
     name: plantsdb
+    forcePassword: true
+
   service:
     port: 3306
     type: ClusterIP
