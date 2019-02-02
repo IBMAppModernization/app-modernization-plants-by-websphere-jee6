@@ -67,6 +67,10 @@ public class Inventory implements Cloneable, java.io.Serializable
 	private int minThreshold;
 	private int maxThreshold;
 
+	@Version
+  @Column(name = "VERSION")
+  private Integer version;
+
 
 	@Transient
 	private BackOrder backOrder;
