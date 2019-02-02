@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+    app: pbw-liberty-mariadb
+    component: web-app
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name | quote }}
+    tier: frontend
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+         app: pbw-liberty-mariadb
+         component: web-app
+         chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+         release: {{ .Release.Name | quote }}
+         tier: frontend
+
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-web
+        image: "mycluster.icp:8500/{{ .Values.k8sNamespace }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.internalPort }}
+        env:
+        - name: DB_USER
+          value: {{ .Values.global.mariadbUser}}
+        - name: DB_PASSWORD
+          value: {{ .Values.global.mariadbPassword}}
+        - name: DB_HOST
+          value: {{ .Release.Name }}-mariadb
+        - name: DB_PORT
+          value: "{{ .Values.global.mariadbPort}}"

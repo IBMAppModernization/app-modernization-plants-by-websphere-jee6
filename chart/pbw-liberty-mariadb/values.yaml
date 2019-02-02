@@ -1,0 +1,28 @@
+# Default values for pbw-liberty-MariaDB.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+web:
+  enabled: true
+  replicaCount: 1
+  database:
+    mariadbPort: 3306
+    mariadbUser: pbwadmin
+    mariadbPassword: l1bertyR0cks
+  k8sNamespace: changeme
+  image:
+    name: pbw-mysql
+    tag: "1.0"
+    
+
+ibm-maria-dev:
+  enabled: true
+  replicaCount: 1
+  persistence:
+    enabled: false
+  initialDatabase: plantsdb
+  user: pbwadmin
+  password: l1bertyR0cks
+  service:
+    port: 3306
+    type: ClusterIP

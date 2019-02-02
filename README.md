@@ -12,7 +12,7 @@ This version of Plants By WebSphere is small  Java EE 6 app that uses a rational
 
 **WebSphere Liberty Java application server:**  [WebSphere Liberty](https://developer.ibm.com/wasdev/websphere-liberty/) is a modular and easy-to-use Java application server, built on the open source [Open Liberty](https://openliberty.io/) project.
 
-**Maria DB:** [Maria DB](https://mariadb.org) is an RDMS made by the original developers of MySQL and is guaranteed to stay object source.
+**Maria DB:** [Maria DB](https://mariadb.org) is a strictly open source  RDMS forked from  MySQL  by the original developers of MySQL.
 
 ## How it Works
 
