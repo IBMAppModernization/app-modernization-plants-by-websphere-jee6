@@ -23,17 +23,26 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}-liberty
-        image: "mycluster.icp:8500/{{ .Values.k8sNamespace }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
         env:
         - name: DB_USER
-          value: {{ .Values.database.mariadbUser}}
+          valueFrom:
+            secretKeyRef:
+              name:  {{ .Release.Name }}-{{ .Chart.Name }}-secrets
+              key: maria-db-user
         - name: DB_PASSWORD
-          value: {{ .Values.database.mariadbPassword}}
+          valueFrom:
+            secretKeyRef:
+              name:  {{ .Release.Name }}-{{ .Chart.Name }}-secrets
+              key: maria-db-password
         - name: DB_HOST
           value: {{ .Release.Name }}-mariadb
         - name: DB_PORT
-          value: "{{ .Values.database.mariadbPort}}"
+          valueFrom:
+            secretKeyRef:
+              name:  {{ .Release.Name }}-{{ .Chart.Name }}-secrets
+              key: maria-db-port

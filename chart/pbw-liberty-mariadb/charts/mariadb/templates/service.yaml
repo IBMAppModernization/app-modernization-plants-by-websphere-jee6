@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+     app: {{ .Release.Name }}-{{ .Chart.Name }}
+     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+     release: {{ .Release.Name }}
+     heritage: {{ .Release.Service }}
+     tier: database
+
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+     - port: {{ .Values.service.internalPort }}
+  selector:
+    app: {{ .Release.Name }}-{{ .Chart.Name }}
+    tier: database
