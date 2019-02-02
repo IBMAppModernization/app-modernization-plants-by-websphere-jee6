@@ -30,10 +30,10 @@ spec:
           containerPort: {{ .Values.service.internalPort }}
         env:
         - name: DB_USER
-          value: {{ .Values.global.mariadbUser}}
+          value: {{ .Values.database.mariadbUser}}
         - name: DB_PASSWORD
-          value: {{ .Values.global.mariadbPassword}}
+          value: {{ .Values.database.mariadbPassword}}
         - name: DB_HOST
-          value: {{ .Release.Name }}-mariadb
+          value: {{ .Release.Name }}-ibm-mariadb-dev
         - name: DB_PORT
-          value: "{{ .Values.global.mariadbPort}}"
+          value: "{{ .Values.database.mariadbPort}}"
