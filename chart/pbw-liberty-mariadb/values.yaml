@@ -6,9 +6,9 @@ liberty:
   enabled: true
   replicaCount: 1
   database:
-    mariadbPort: 3306
-    mariadbUser: pbwadmin
-    mariadbPassword: l1bertyR0cks
+    port: "3306"
+    user: pbwadmin
+    password: l1bertyR0cks
   k8sNamespace: changeme
   image:
     name: pbw-mysql
