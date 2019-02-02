@@ -6,7 +6,7 @@
 This is a modified version of the code for the [Plants by WebSphere sample](https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5/com.ibm.websphere.nd.multiplatform.doc/ae/covr_samples.htmlgithub
   ) that comes with WebSphere Application Server V8.5.5 for use in IBM Cloud Private developer training. The code has been modified per the recommendations of the [IBM Cloud Transformation Advisor](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/featured_applications/transformation_advisor.html).
 
-This is a small  Java EE 6 app that runs on the WebSphere Liberty Java application server and uses a MySQL or MariaDB database server.
+This version of Plants By WebSphere is small  Java EE 6 app that uses a rational database.
 
 ## Required runtimes
 

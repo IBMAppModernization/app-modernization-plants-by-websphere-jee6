@@ -24,11 +24,11 @@
         </library>
     </jdbcDriver>
 <dataSource id="MariaDB JTA for Plants by WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSource">
-        <properties databaseName="plantsdb" password="${env.MARIADB_PASSWORD}" portNumber="${env.MARIADB_PORT}" serverName="${env.MARIADB_HOST}" user="${env.MARIADB_USER}"/>
+        <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource>
 <dataSource id="Non JTA MariaDB for Plants By WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA">
-        <properties databaseName="plantsdb" password="${env.MARIADB_PASSWORD}" portNumber="${env.MARIADB_PORT}" serverName="${env.MARIADB_HOST}" user="${env.MARIADB_USER}"/>
+        <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource>
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">

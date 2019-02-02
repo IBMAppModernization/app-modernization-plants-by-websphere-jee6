@@ -20,18 +20,18 @@ HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
 HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
 
 if [ $HTTP_STATUS -ne 200 ]; then
-   if [ $HTTP_STATUS -eq 400 ] || [ $HTTP_STATUS -eq 401 ]; then
-      echo "Error validating parameters: try creating the secrets file again with the right host, port, username and password"
+   if [ $HTTP_STATUS -eq 401 ]; then
+      echo "$HTTP_BODY"
       exit 1
    else
-      echo "Fatal error:  invalid URL for Database connection validation service or service not available"
+      echo "Fatal error:  invalid URL for database connection validation service or service not available"
       exit 1
    fi
 fi
 
 # Validate the body
 if [ "$HTTP_BODY" == "Connection successful" ]; then
-  echo "Database connection successful"
+  echo "$HTTP_BODY"
   exit 0
 else
   echo "Fatal error:  invalid URL for database connection validation service"
