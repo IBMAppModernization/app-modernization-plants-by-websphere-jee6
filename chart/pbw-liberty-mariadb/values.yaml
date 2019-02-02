@@ -13,6 +13,13 @@ web:
   image:
     name: pbw-mysql
     tag: "1.0"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 250Mi
+    requests:
+      cpu: 300m
+      memory: 250Mi
 
 
 ibm-mariadb-dev:
@@ -20,9 +27,11 @@ ibm-mariadb-dev:
   replicaCount: 1
   persistence:
     enabled: false
-  initialDatabase: plantsdb
-  user: pbwadmin
-  password: l1bertyR0cks
+    useDynamicProvisioning: false
+  database:
+    user: pbwadmin
+    password: l1bertyR0cks
+    name: plantsdb
   service:
     port: 3306
     type: ClusterIP
@@ -32,4 +41,4 @@ ibm-mariadb-dev:
       memory: 500Mi
     requests:
       cpu: 500m
-      memory: 250Mi 
+      memory: 250Mi
