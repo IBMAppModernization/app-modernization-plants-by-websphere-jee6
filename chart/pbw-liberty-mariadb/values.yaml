@@ -29,7 +29,8 @@ mariadb:
     enabled: false
   master:
     persistence:
-      enabled: false
+      enabled: true
+      size: 2Gi
     resources:
       limits:
         cpu: 500m
