@@ -36,5 +36,5 @@
         <property name="mail.smtp.host" value="smtp.gmail.com"/>
     </mailSession>
 <applicationManager autoExpand="true"/>
-<application id="plants-by-websphere-jee6-mariadb" name="plants-by-websphere-jee6-mariadb" location="plants-by-websphere-jee6-mariadb.ear"/>
+<application id="plants-by-websphere-jee6-mysql" name="plants-by-websphere-jee6-mysql" location="plants-by-websphere-jee6-mysql.ear"/>
 </server>
