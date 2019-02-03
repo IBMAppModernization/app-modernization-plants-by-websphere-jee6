@@ -99,10 +99,10 @@ public class OrderItem
 	private String inventoryId;
 
 	@ManyToOne
-	@JoinColumn(name="INVENTORYID", insertable=false, updatable=false)
+	@JoinColumn(name="INVENTORYID")
 	private Inventory inventory;
 	@ManyToOne
-	@JoinColumn(name="ORDER_ORDERID", insertable=false, updatable=false)
+	@JoinColumn(name="ORDER_ORDERID")
 	private Order order;
 
 	public int getCategory() {
