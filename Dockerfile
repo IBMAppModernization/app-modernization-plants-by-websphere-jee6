@@ -2,11 +2,11 @@
 FROM websphere-liberty:webProfile7
 
 # Add MariaDB Type 4 JDBC driver
-#RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
-#COPY docker/liberty/mariadb-java-client-1.7.4.jar /opt/ibm/wlp/usr/shared/resources/mariadb/
+RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
+COPY docker/liberty/mariadb-java-client-1.7.4.jar /opt/ibm/wlp/usr/shared/resources/mariadb/
 
-RUN mkdir /opt/ibm/wlp/usr/shared/resources/mysql
-COPY docker/liberty/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/resources/mysql/
+#RUN mkdir /opt/ibm/wlp/usr/shared/resources/mysql
+#COPY docker/liberty/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/resources/mysql/
 
 
 # Install all required Liberty modules
