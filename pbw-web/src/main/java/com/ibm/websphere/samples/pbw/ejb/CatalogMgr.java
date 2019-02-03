@@ -123,7 +123,7 @@ public class CatalogMgr
 		boolean retval = true;
 	  em.getTransaction().begin();
 		em.persist(item);
-		em.flush(item);
+		em.flush();
 		em.getTransaction().commit();
 		return retval;
 	}
