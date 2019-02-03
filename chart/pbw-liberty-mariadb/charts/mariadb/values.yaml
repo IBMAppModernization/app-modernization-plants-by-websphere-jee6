@@ -1,7 +1,7 @@
 image:
   repository: djccarew/mariadb-for-pbw
-  tag: "1.0"
-  pullPolicy: Always
+  tag: "1.0.1"
+  pullPolixy: Always
 
 service:
   type: ClusterIP
