@@ -1,5 +1,5 @@
 #IMAGE: Get the base image for Liberty
-FROM websphere-liberty:webProfile7
+FROM websphere-liberty:webProfile8
 
 # Add MariaDB Type 4 JDBC driver
 RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
