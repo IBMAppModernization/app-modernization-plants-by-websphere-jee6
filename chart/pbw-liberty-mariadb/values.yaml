@@ -24,13 +24,14 @@ liberty:
       memory: 250Mi
 
 
-mariadb:
+ibm-mariadb-dev:
   enabled: true
   replicaCount: 1
-  image:
-    tag: "1.0.1"
-    repository: "djccarew/mariadb-for-pbw"
-    pullPolicy: Always
+  persistence:
+    enabled: false
+  user: pbwadmin
+  password: l1bertyR0cks
+  initialDatabase: plantsdb
   resources:
     limits:
       cpu: 500m
@@ -38,10 +39,6 @@ mariadb:
     requests:
       cpu: 500m
       memory: 250Mi
-  database:
-    user: pbwadmin
-    password: l1bertyR0cks
-    name: plantsdb
   service:
     port: 3306
     type: ClusterIP
