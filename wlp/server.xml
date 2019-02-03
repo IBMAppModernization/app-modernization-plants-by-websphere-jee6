@@ -18,7 +18,7 @@
 </featureManager>
 <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 <variable name="MARIADB_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mariadb/" />
-<jdbcDriver id="MariaDB-1.7.4" javax.sql.DataSource="org.mariadb.jdbc.MariaDBPoolDataSource">
+<jdbcDriver id="MariaDB-1.7.4" javax.sql.DataSource="org.mariadb.jdbc.MariaXaConnection">
         <library>
             <file name="${MARIADB_JDBC_DRIVER_PATH}/mariadb-java-client-1.7.4.jar"/>
         </library>
@@ -27,10 +27,10 @@
         <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource>
-<dataSource id="Non JTA MariaDB for Plants By WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA">
+<!--<dataSource id="Non JTA MariaDB for Plants By WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA">
         <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
-    </dataSource>
+    </dataSource> -->
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
         <property name="mail.smtp.host" value="smtp.gmail.com"/>
