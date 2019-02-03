@@ -26,6 +26,9 @@ liberty:
 mariadb:
   enabled: true
   replicaCount: 1
+  image:
+    tag: "1.1"
+    repository: "djccarew/mariadb-for-pbw"
   resources:
     limits:
       cpu: 500m
