@@ -27,7 +27,7 @@ mariadb:
   enabled: true
   replicaCount: 1
   image:
-    tag: "1.1"
+    tag: "1.0"
     repository: "djccarew/mariadb-for-pbw"
   resources:
     limits:

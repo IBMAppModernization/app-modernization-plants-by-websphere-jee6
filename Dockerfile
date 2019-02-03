@@ -1,5 +1,5 @@
 #IMAGE: Get the base image for Liberty
-FROM websphere-liberty:webProfile8
+FROM websphere-liberty:webProfile7
 
 # Add MariaDB Type 4 JDBC driver
 RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
@@ -19,7 +19,7 @@ RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense \
   cdi-1.2 \
 	javaMail-1.5 \
   el-3.0 \
-	jpa-2.1
+	jpa-2.0
 
 #BINARIES: Add in all necessary application binaries
 COPY wlp/server.xml /config
