@@ -18,7 +18,7 @@
 </featureManager>
 <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 <variable name="MARIADB_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mariadb/" />
-<jdbcDriver id="MariaDB-1.7.4" javax.sql.DataSource="org.mariadb.jdbc.MariaDbPooledConnection">
+<jdbcDriver id="MariaDB-1.7.4" javax.sql.DataSource="org.mariadb.jdbc.MariaDbPoolDataSource">
         <library>
             <file name="${MARIADB_JDBC_DRIVER_PATH}/mariadb-java-client-1.7.4.jar"/>
         </library>
