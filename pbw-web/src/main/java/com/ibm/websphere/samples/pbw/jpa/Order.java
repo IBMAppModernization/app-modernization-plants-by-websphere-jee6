@@ -81,8 +81,10 @@ public class Order
 	@ManyToOne
 	@JoinColumn(name="CUSTOMERID")
 	private Customer customer;
+	@Transient
 	private Collection orderItems;
 
+  @Transient
 	private Collection<OrderItem> items = null;
 
 	/**

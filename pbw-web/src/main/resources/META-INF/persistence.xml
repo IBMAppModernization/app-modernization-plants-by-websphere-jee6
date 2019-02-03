@@ -5,17 +5,13 @@
 	<persistence-unit name="PBW">
 		<jta-data-source>jdbc/PlantsByWebSphereMariaDBDataSource</jta-data-source>
 		<non-jta-data-source>jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA</non-jta-data-source>
-		<class>com.ibm.websphere.samples.pbw.jpa.BackOrder</class>
-		<class>com.ibm.websphere.samples.pbw.jpa.Customer</class>
-		<class>com.ibm.websphere.samples.pbw.jpa.Inventory</class>
-		<class>com.ibm.websphere.samples.pbw.jpa.Order</class>
-		<class>com.ibm.websphere.samples.pbw.jpa.OrderItem</class>
-		<class>com.ibm.websphere.samples.pbw.jpa.Supplier</class>
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+	
 		<properties>
-			<!-- Ensures the DB schema is kept in sync with the JPA entity classes as they are developed - - >
-			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-			-->
+			<!-- Ensures the DB schema is kept in sync with the JPA entity classes as they are developed -->
+		    <property name="eclipselink.ddl-generation" value="create-tables"/>
+
+	    	<property name="eclipselink.cache.shared.default" value="false"/>
+
 		</properties>
 	</persistence-unit>
 </persistence>
