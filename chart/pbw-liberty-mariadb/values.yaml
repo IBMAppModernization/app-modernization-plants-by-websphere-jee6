@@ -29,9 +29,10 @@ ibm-mariadb-dev:
   replicaCount: 1
   persistence:
     enabled: false
-  user: pbwadmin
-  password: l1bertyR0cks
-  initialDatabase: plantsdb
+  database:
+    user: pbwadmin
+    password: l1bertyR0cks
+    name: plantsdb
   resources:
     limits:
       cpu: 500m
