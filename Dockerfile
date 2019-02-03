@@ -22,7 +22,7 @@ RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense \
   cdi-1.2 \
 	javaMail-1.5 \
   el-3.0 \
-	jpa-2.0
+	jpa-2.1
 
 #BINARIES: Add in all necessary application binaries
 COPY wlp/server.xml /config
