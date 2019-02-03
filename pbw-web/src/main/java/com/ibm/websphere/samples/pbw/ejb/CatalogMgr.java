@@ -121,10 +121,8 @@ public class CatalogMgr
 	public boolean addItem(Inventory item)
 	{
 		boolean retval = true;
-	  em.getTransaction().begin();
 		em.persist(item);
 		em.flush();
-		em.getTransaction().commit();
 		return retval;
 	}
 
