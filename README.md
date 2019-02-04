@@ -1,12 +1,12 @@
 
 # IBM Client Developer Advocacy App Modernization Series
 
-##  Plants by WebSphere legacy Java EE 6  app for multiple labs in the App Modernization Series
+##  Plants by WebSphere Java EE 6  app for multiple labs in the App Modernization Series
 
 This is a modified version of the code for the [Plants by WebSphere sample](https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5/com.ibm.websphere.nd.multiplatform.doc/ae/covr_samples.htmlgithub
   ) that comes with WebSphere Application Server V8.5.5 for use in IBM Cloud Private developer training. The code has been modified per the recommendations of the [IBM Cloud Transformation Advisor](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/featured_applications/transformation_advisor.html).
 
-This version of Plants By WebSphere is small  Java EE 6 app that uses a rational database.
+This version of Plants By WebSphere is a small Java EE 6 app that uses a relational database to run a fictional eCommerce website called Plants By WebSphere.
 
 ## Required runtimes
 
@@ -16,7 +16,7 @@ This version of Plants By WebSphere is small  Java EE 6 app that uses a rational
 
 ## How it Works
 
-The app consists  of a Java EE  web app for a fictional online plant store.  It support user registration and purchases of various plants.  
+The app consists  of a Java EE  web app for a fictional online plant store.  It supports user registration and purchases of various plants.  
 
 <p align="center">
   <kbd>
