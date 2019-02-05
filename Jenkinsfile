@@ -1,6 +1,6 @@
 // Pod Template
 def cloud = env.CLOUD ?: "kubernetes"
-def serviceAccount = env.SERVICE_ACCOUNT ?: "jnkns-latest-jenkins"
+def serviceAccount = env.SERVICE_ACCOUNT ?: "jnkns-for-cicd-lab"
 def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials"
 def namespace = env.NAMESPACE ?: "default"
 def registry = env.REGISTRY ?: "mycluster.icp:8500"
