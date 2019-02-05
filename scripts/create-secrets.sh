@@ -14,13 +14,13 @@ ENC_password=$(echo "$password" | tr -d '\n' | base64)
 ENC_host=$(echo "$host" | tr -d '\n' | base64)
 ENC_port=$(echo "$port" | tr -d '\n' | base64)
 
-cat <<EOF > k8s/pbw-mysql-credentials.yaml
+cat <<EOF > k8s/pbw-liberty-mariadb-credentials.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: pbw-mysql-credentials
+  name: pbw-liberty-mariadb-credentials
   labels:
-    app: pbw-mysql
+    app: pbw-liberty-mariadb
 type: Opaque
 data:
   username: $ENC_username

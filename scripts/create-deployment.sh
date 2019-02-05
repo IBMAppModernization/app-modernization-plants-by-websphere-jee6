@@ -1,14 +1,14 @@
 echo "Enter your ICP namespace: "
 read -r namespace
 
-cat <<EOF > k8s/pbw-mysql-deployment.yaml
+cat <<EOF > k8s/pbw-liberty-mariadb-deployment.yaml
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: pbw-liberty
   labels:
-    app: pbw-mysql
+    app: pbw-liberty-mariadb
 spec:
   type: NodePort
   ports:
@@ -17,7 +17,7 @@ spec:
       targetPort: 9080
 
   selector:
-    app: pbw-mysql
+    app: pbw-liberty-mariadb
     tier: web-app
 ---
 apiVersion: extensions/v1beta1
@@ -25,14 +25,14 @@ kind: Deployment
 metadata:
   name: pbw-liberty
   labels:
-    app: pbw-mysql
+    app: pbw-liberty-mariadb
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: pbw-mysql
+        app: pbw-liberty-mariadb
         tier: web-app
     spec:
       containers:
@@ -48,17 +48,17 @@ spec:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pbw-mysql-credentials
+                  name: pbw-liberty-mariadb-credentials
                   key: password
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  name: pbw-mysql-credentials
+                  name: pbw-liberty-mariadb-credentials
                   key: host
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
-                  name: pbw-mysql-credentials
+                  name: pbw-liberty-mariadb-credentials
                   key: port
           ports:
             - containerPort: 9080

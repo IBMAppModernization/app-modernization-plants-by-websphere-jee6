@@ -10,8 +10,8 @@ liberty:
     user: pbwadmin
     password: l1bertyR0cks
   image:
-    name: pbw-mysql
-    tag: "1.0"
+    name: pbw-mariadb-web
+    tag: "1.0.0"
     registry: "mycluster.icp:8500"
     namespace: changeme
     pullPolicy: Always
