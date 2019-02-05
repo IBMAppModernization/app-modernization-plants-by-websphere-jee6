@@ -38,7 +38,7 @@ podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, names
     node(podLabel) {
         checkout scm
         container('maven') {
-            stage('Build application war file') {
+            stage('Build application ear file') {
                sh """
                #!/bin/bash
                mvn -B -DskipTests clean package
