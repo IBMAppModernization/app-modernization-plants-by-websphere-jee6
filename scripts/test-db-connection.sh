@@ -11,7 +11,7 @@ if [ ! -f k8s/pbw-liberty-mariadb-credentials.yaml ]; then
 fi
 
 # store the whole response with the status at the and
-HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" -X POST -H "Content-Type: text/plain" -d @k8s/pbw-liberty-mariadb-credentials.yaml $1)
+HTTP_RESPONSE=$(curl --post301 --silent --write-out "HTTPSTATUS:%{http_code}" -L -X POST -H "Content-Type: text/plain" -d @k8s/pbw-liberty-mariadb-credentials.yaml $1)
 
 # extract the body
 HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
