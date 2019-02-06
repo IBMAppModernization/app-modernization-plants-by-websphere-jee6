@@ -36,14 +36,14 @@ spec:
         tier: web-app
     spec:
       containers:
-        - image: mycluster.icp:8500/$namespace/pbw-mysql:1.0
+        - image: mycluster.icp:8500/$namespace/pbw-mariadb-web:1.0.0
           imagePullPolicy: Always
           name: pbw-liberty
           env:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: pbw-mysql-credentials
+                  name: pbw-liberty-mariadb-credentials
                   key: username
             - name: DB_PASSWORD
               valueFrom:
