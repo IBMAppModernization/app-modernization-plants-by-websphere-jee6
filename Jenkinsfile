@@ -4,7 +4,7 @@ def serviceAccount = env.SERVICE_ACCOUNT ?: "jnkns-for-cicd-lab-jenkins"
 def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials"
 def namespace = env.NAMESPACE ?: "default"
 def registry = env.REGISTRY ?: "mycluster.icp:8500"
-def majorPrefix = env.MAJOR_PREFIX ?: "1.0"
+def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
 
 // In this multiuser scenario  we derive user specific vars from the logged in Jenkins user
 //def userName = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
