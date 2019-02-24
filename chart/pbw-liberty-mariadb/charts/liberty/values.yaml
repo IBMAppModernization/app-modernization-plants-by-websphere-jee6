@@ -6,10 +6,10 @@ image:
   pullPolicy: Always
 
 ingress:
-  enabled: false
+  enabled: true
 
 service:
-  type: NodePort
+  type: ClusterIP
   internalPort: 9080
 
   resources: {}

@@ -63,4 +63,24 @@ spec:
           ports:
             - containerPort: 9080
               name: web
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /    # This line is only needed when deploying on IBM Cloud Private.
+  name: pbw-$namespace-ingress  # The ingress name must be unique for each ingress rule created.
+  labels:
+    app:  pbw-liberty-mariadb
+
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /pbw-$namespace-ui  # This is the url path used to access the service externally.
+        backend:
+          serviceName: pbw-liberty # This is the name of the service to be exposed.
+          servicePort: 9080
+
 EOF
