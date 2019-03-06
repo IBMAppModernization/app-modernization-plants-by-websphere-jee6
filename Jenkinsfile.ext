@@ -51,15 +51,17 @@ pipeline {
        }
 
        stage('Push Docker Image to Registry') {
-          withCredentials([usernamePassword(credentialsId: registryCredsID,
-                                       usernameVariable: 'USERNAME',
-                                       passwordVariable: 'PASSWORD')]) {
-              sh """
-              #!/bin/bash
-              docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY}
-              docker push ${env.REGISTRY}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
-              """
-          }
+          steps {
+             withCredentials([usernamePassword(credentialsId: registryCredsID,
+                                          usernameVariable: 'USERNAME',
+                                          passwordVariable: 'PASSWORD')]) {
+                 sh """
+                 #!/bin/bash
+                 docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY}
+                 docker push ${env.REGISTRY}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+                 """
+             }
+           }
        }
 
         stage('Deploy2ICP') {
