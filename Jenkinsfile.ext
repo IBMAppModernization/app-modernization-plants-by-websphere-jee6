@@ -1,7 +1,6 @@
 //Needed for basic Jenkins
 
 def clusterCredsID = env.CLUSTER_CREDENTIALS ?: "cluster-creds"
-def REGION = "us-east"
 
 pipeline {
     environment {
@@ -9,6 +8,7 @@ pipeline {
          MAJOR_PREFIX = "1.0.0"
          RELEASE_NAME = "pbw-liberty-mariadb"
          DEPLOYMENT_NS = "default"
+         REGION = "us-east"
     }
 
     tools {
