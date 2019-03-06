@@ -23,8 +23,8 @@ pipeline {
          }
 
         stage('MVN Build') {
-          checkout scm
           steps {
+              checkout scm
               sh 'mvn clean package'
           }
         }
