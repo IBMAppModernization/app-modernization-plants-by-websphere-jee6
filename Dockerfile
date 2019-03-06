@@ -11,7 +11,6 @@ COPY docker/liberty/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/reso
 
 
 # Install all required Liberty modules
-RUN /opt/ibm/wlp/bin/installUtility testConnection --verbose
 RUN /opt/ibm/wlp/bin/installUtility install --verbose  --acceptLicense \
 	jsp-2.3 \
 	servlet-3.1 \
