@@ -19,7 +19,7 @@ podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, names
     ],
     volumes: [
         hostPathVolume(hostPath: '/etc/docker/certs.d', mountPath: '/etc/docker/certs.d'),
-        hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/docker.sock')
+        hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
     ],
     containers: [
         containerTemplate(name: 'maven', image: 'maven:3-alpine', ttyEnabled: true, command: 'cat'),

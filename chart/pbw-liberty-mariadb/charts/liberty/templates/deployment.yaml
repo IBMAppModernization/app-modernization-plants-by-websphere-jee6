@@ -21,6 +21,8 @@ spec:
          tier: frontend
 
     spec:
+      imagePullSecrets:
+      - name: myimages
       containers:
       - name: {{ .Release.Name }}-liberty
         image: "{{ .Values.image.registry }}/{{ .Values.image.namespace }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
