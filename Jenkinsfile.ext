@@ -1,6 +1,7 @@
 //Needed for basic Jenkins
 
-def registryCredsID = env.REGISTRY_CREDENTIALS ?: "reg-creds"
+def clusterCredsID = env.CLUSTER_CREDENTIALS ?: "cluster-creds"
+def REGION = "us-east"
 
 pipeline {
     environment {
@@ -47,7 +48,7 @@ pipeline {
 
        stage('Push Docker Image to Registry') {
           steps {
-             withCredentials([usernamePassword(credentialsId: registryCredsID,
+             withCredentials([usernamePassword(credentialsId: clusterCredsID,
                                           usernameVariable: 'USERNAME',
                                           passwordVariable: 'PASSWORD')]) {
                  sh """
@@ -62,10 +63,24 @@ pipeline {
         stage('Deploy new Docker Image') {
             steps {
                 echo 'Deploying....'
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeCfg', namespace: '', serverUrl: '') {
-                   // some block
-                   sh '/usr/bin/kubectl get pods'
-                }
+                withCredentials([usernamePassword(credentialsId: clusterCredsID,
+                                             usernameVariable: 'USERNAME',
+                                             passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    #!/bin/bash
+                    ibmcloud login --apikey ${PASSWORD} -r ${env.REGION} -g ${env.RESOURCE_GROUP}
+                    eval $(ibmcloud ks cluster-config --cluster user01-cluster --export)
+                    DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
+                    kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
+                    if [ \${?} -ne "0" ]; then
+                        # No deployment to update
+                        echo 'No deployment to update'
+                        exit 1
+                    fi
+                    # Update Deployment
+                    kubectl --namespace=${env.DEPLOYMENT_NS} set image \${DEPLOYMENT} ${env.RELEASE_NAME}-liberty=${env.REGISTRY}/${env.DEPLOYMENT_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+                    kubectl --namespace=${env.DEPLOYMENT_NS} rollout status \${DEPLOYMENT}
+                    """
 
             }
         }
