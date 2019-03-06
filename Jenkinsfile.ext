@@ -1,4 +1,4 @@
-//Needed for basic Jenkins
+// Basic Pipeline
 
 def clusterCredsID = env.CLUSTER_CREDENTIALS ?: "cluster-creds"
 
@@ -25,6 +25,9 @@ pipeline {
                   #!/bin/bash
                  echo "REGISTRY_URL = ${REGISTRY_URL}"
                  echo "REGISTRY_NS = ${REGISTRY_NS}"
+                 echo "REGION = ${REGION}"
+                 echo "RESOURCE_GROUP = ${RESOURCE_GROUP}"
+                 echo "CLUSTER_NAME = ${CLUSTER_NAME}"
                 '''
             }
          }
@@ -69,7 +72,7 @@ pipeline {
                     sh """
                     #!/bin/bash
                     ibmcloud login --apikey ${PASSWORD} -r ${env.REGION} -g ${env.RESOURCE_GROUP}
-                    eval \$(ibmcloud ks cluster-config --cluster user01-cluster --export)
+                    eval \$(ibmcloud ks cluster-config --cluster ${env.CLUSTER_NAME} --export)
                     DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
                     kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
                     if [ \${?} -ne "0" ]; then
