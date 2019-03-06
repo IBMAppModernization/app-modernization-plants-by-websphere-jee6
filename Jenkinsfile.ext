@@ -8,7 +8,6 @@ pipeline {
     tools {
         maven 'Apache Maven 3.5.2'
         jdk 'Open JDK 8'
-        docker 'Docker 18.09.3'
     }
 
     agent any
@@ -26,7 +25,6 @@ pipeline {
         stage('MVN Build') {
           checkout scm
           steps {
-
               sh 'mvn clean package'
           }
         }
