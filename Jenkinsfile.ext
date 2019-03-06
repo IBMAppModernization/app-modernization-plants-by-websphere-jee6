@@ -62,7 +62,9 @@ pipeline {
         stage('Deploy new Docker Image') {
             steps {
                 echo 'Deploying....'
+                export KUBECONFIG=kube/user01/kubecfg.yml
             //  sh '/deploy2icp.sh $componentName'
+                kubectl get pods
             }
         }
     }
