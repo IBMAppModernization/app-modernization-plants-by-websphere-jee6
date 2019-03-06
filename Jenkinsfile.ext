@@ -62,8 +62,11 @@ pipeline {
         stage('Deploy new Docker Image') {
             steps {
                 echo 'Deploying....'
-                export KUBECONFIG=kube/user01/kubecfg.yml
-                sh '/usr/bin/kubectl get pods'
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeCfg', namespace: '', serverUrl: '') {
+                   // some block
+                   sh '/usr/bin/kubectl get pods'
+                }
+
             }
         }
     }
