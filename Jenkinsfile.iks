@@ -41,6 +41,7 @@ podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, names
             stage('Build Docker Image') {
                 sh """
                 #!/bin/bash
+                ping -c 4 www.ibm.com
                 docker build -t ${env.REGISTRY}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER} .
                 """
             }
