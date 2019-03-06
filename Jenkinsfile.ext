@@ -1,0 +1,51 @@
+//Needed for basic Jenkins
+pipeline {
+    environment {
+         componentName = "portfolio"
+         imagename = "${componentName}:demo"
+    }
+
+    tools {
+        maven 'Apache Maven 3.5.2'
+        jdk 'Open JDK 8'
+        docker 'Docker 18.09.3'
+    }
+
+    agent any
+
+    stages {
+         stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+         }
+
+        stage('MVN Build') {
+          checkout scm
+          steps {
+
+              sh 'mvn clean package'
+          }
+        }
+
+       stage('Docker Build&Push') {
+            steps {
+                script {
+                echo 'Delivering....'
+                //docker.build imagename
+                }
+                //sh '/pushdocker2icp.sh $imagename'
+            }
+       }
+
+        stage('Deploy2ICP') {
+            steps {
+                echo 'Deploying....'
+            //  sh '/deploy2icp.sh $componentName'
+            }
+        }
+    }
+}
