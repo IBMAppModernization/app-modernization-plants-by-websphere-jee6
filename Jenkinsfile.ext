@@ -1,18 +1,14 @@
 //Needed for basic Jenkins
 
 def registryCredsID = env.REGISTRY_CREDENTIALS ?: "reg-creds"
-def namespace = env.NAMESPACE ?: "default"
-def registry = env.REGISTRY ?: "us.icr.io"
-def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
-def registryNS = env.REGISTRY_NAMESPACE ?: "/appmod_ss/invalid"
-def releaseName = "pbw-liberty-mariadb"
+
 
 pipeline {
     environment {
-         REGISTRY_URL = registry
-         REGISTRY_NS = registryNS
+         REGISTRY_URL = "us.icr.io"
          MAJOR_PREFIX = "1.0.0"
-         RELEASE_NAME = releaseName
+         RELEASE_NAME = "pbw-liberty-mariadb"
+         DEPLOYMENT_NS = "default"
     }
 
     tools {
@@ -26,8 +22,14 @@ pipeline {
          stage ('Initialize') {
             steps {
                 sh '''
-                    echo "REGISTRY_URL = ${REGISTRY_URL}"
-                    echo "M2_HOME = ${M2_HOME}"
+                    if [ -z "${REGISTRY_NS}" ]
+                    then
+                       currentBuild.result = 'ABORTED'
+                       error('Registry namespace part of image tag not set')
+                    else
+                       echo "REGISTRY_URL = ${REGISTRY_URL}"
+                       echo "REGISTRY_NS = ${REGISTRY_NS}"
+                    fi
                 '''
             }
          }
@@ -45,7 +47,7 @@ pipeline {
                    echo "docker build -t ${REGISTRY}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} ."
                    sh 'docker build -t ${REGISTRY}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} .'
                 }
-                //sh '/pushdocker2icp.sh $imagename'
+
             }
        }
 
@@ -63,7 +65,7 @@ pipeline {
            }
        }
 
-        stage('Deploy2ICP') {
+        stage('Deploy new Docker Image') {
             steps {
                 echo 'Deploying....'
             //  sh '/deploy2icp.sh $componentName'
