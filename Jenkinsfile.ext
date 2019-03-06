@@ -22,15 +22,9 @@ pipeline {
             steps {
                 sh '''
                   #!/bin/bash
-                  if [ -z "${REGISTRY_NS}" ]
-                  then
-                      currentBuild.result = 'ABORTED'
-                      error('Registry namespace part of image tag not set')
-                  else
-                      echo "REGISTRY_URL = ${REGISTRY_URL}"
-                      echo "REGISTRY_NS = ${REGISTRY_NS}"
-                  fi
-                  '''
+                 echo "REGISTRY_URL = ${REGISTRY_URL}"
+                 echo "REGISTRY_NS = ${REGISTRY_NS}"
+                '''
             }
          }
 
