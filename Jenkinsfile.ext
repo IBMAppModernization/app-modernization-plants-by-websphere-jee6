@@ -63,7 +63,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 export KUBECONFIG=kube/user01/kubecfg.yml
-                sh 'kubectl get pods'
+                sh '/usr/bin/kubectl get pods'
             }
         }
     }
