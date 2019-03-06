@@ -80,7 +80,8 @@ pipeline {
                     # Update Deployment
                     kubectl --namespace=${env.DEPLOYMENT_NS} set image \${DEPLOYMENT} ${env.RELEASE_NAME}-liberty=${env.REGISTRY}/${env.DEPLOYMENT_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
                     kubectl --namespace=${env.DEPLOYMENT_NS} rollout status \${DEPLOYMENT}
-                }    """
+                    """
+                }
 
             }
         }
