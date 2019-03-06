@@ -4,16 +4,15 @@ def registryCredsID = env.REGISTRY_CREDENTIALS ?: "reg-creds"
 def namespace = env.NAMESPACE ?: "default"
 def registry = env.REGISTRY ?: "us.icr.io"
 def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
-def registryNS = env.REGISTRY_NS ?: "/appmod_ss/invalid"
+def registryNS = env.REGISTRY_NAMESPACE ?: "/appmod_ss/invalid"
 def releaseName = "pbw-liberty-mariadb"
 
 pipeline {
     environment {
-         componentName = "portfolio"
-         imagename = "${componentName}:demo"
-         //REGISTRY = "us.icr.io"
-         REGISTRY_NS = "appmod_ss/user01"
+         REGISTRY_URL = registry
+         REGISTRY_NS = registryNS
          MAJOR_PREFIX = "1.0.0"
+         RELEASE_NAME = releaseName
     }
 
     tools {
@@ -27,7 +26,7 @@ pipeline {
          stage ('Initialize') {
             steps {
                 sh '''
-                    echo "PATH = ${PATH}"
+                    echo "REGISTRY_URL = ${REGISTRY_URL}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
             }
@@ -57,8 +56,8 @@ pipeline {
                                           passwordVariable: 'PASSWORD')]) {
                  sh """
                  #!/bin/bash
-                 docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY}
-                 docker push ${env.REGISTRY}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+                 docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY_URL}
+                 docker push ${env.REGISTRY_URL}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
                  """
              }
            }
