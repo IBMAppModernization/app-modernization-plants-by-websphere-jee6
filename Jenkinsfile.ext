@@ -2,7 +2,6 @@
 
 def registryCredsID = env.REGISTRY_CREDENTIALS ?: "reg-creds"
 
-
 pipeline {
     environment {
          REGISTRY_URL = "us.icr.io"
