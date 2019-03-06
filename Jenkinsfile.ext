@@ -3,6 +3,9 @@ pipeline {
     environment {
          componentName = "portfolio"
          imagename = "${componentName}:demo"
+         REGISTRY = "us.icr.io"
+         REGISTRY_NS = "appmod_ss/user01"
+         MAJOR_PREFIX = "1.0.0"
     }
 
     tools {
@@ -22,7 +25,7 @@ pipeline {
             }
          }
 
-        stage('MVN Build') {
+        stage('Build application ear file') {
           steps {
               checkout scm
               sh 'mvn clean package'
@@ -32,8 +35,8 @@ pipeline {
        stage('Docker Build&Push') {
             steps {
                 script {
-                echo 'Delivering....'
-                //docker.build imagename
+                   echo "docker build -t ${REGISTRY}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} ."
+                   sh 'docker build -t ${REGISTRY}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} .'
                 }
                 //sh '/pushdocker2icp.sh $imagename'
             }
