@@ -11,7 +11,7 @@ pipeline {
     environment {
          componentName = "portfolio"
          imagename = "${componentName}:demo"
-         REGISTRY = "us.icr.io"
+         //REGISTRY = "us.icr.io"
          REGISTRY_NS = "appmod_ss/user01"
          MAJOR_PREFIX = "1.0.0"
     }
@@ -40,7 +40,7 @@ pipeline {
           }
         }
 
-       stage('Docker Build&Push') {
+       stage('Build Docker Image') {
             steps {
                 script {
                    echo "docker build -t ${REGISTRY}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} ."
