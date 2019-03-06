@@ -1,4 +1,12 @@
 //Needed for basic Jenkins
+
+def registryCredsID = env.REGISTRY_CREDENTIALS ?: "reg-creds"
+def namespace = env.NAMESPACE ?: "default"
+def registry = env.REGISTRY ?: "us.icr.io"
+def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
+def registryNS = env.REGISTRY_NS ?: "/appmod_ss/invalid"
+def releaseName = "pbw-liberty-mariadb"
+
 pipeline {
     environment {
          componentName = "portfolio"
@@ -40,6 +48,18 @@ pipeline {
                 }
                 //sh '/pushdocker2icp.sh $imagename'
             }
+       }
+
+       stage('Push Docker Image to Registry') {
+          withCredentials([usernamePassword(credentialsId: registryCredsID,
+                                       usernameVariable: 'USERNAME',
+                                       passwordVariable: 'PASSWORD')]) {
+              sh """
+              #!/bin/bash
+              docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY}
+              docker push ${env.REGISTRY}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+              """
+          }
        }
 
         stage('Deploy2ICP') {
