@@ -8,12 +8,9 @@ def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
 
 // In this multiuser scenario  we derive user specific vars from the logged in Jenkins user
 //def userName = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
-def userName = env.RUN_AS ?: "anonymous"
+def userName = env.USERID ?: "anonymous"
 def releaseName = "pbw-liberty-mariadb-" + userName
-
-// This assumes the last 2 digits of the username are unique (eg user04, user05 etc)
-def userNumber = userName[-2..-1]
-def deploymentNS = "devnamespace" + userNumber
+def deploymentNS = env."devnamespace" + userNumber
 
 def podLabel = "agent-" + releaseName
 
