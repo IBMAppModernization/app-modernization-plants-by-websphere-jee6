@@ -10,7 +10,7 @@ def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
 //def userName = currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 def userName = env.USERID ?: "anonymous"
 def releaseName = "pbw-liberty-mariadb-" + userName
-def deploymentNS = env."devnamespace" + userNumber
+def deploymentNS = env.DEVELOPER_NS + userNumber
 
 def podLabel = "agent-" + releaseName
 
