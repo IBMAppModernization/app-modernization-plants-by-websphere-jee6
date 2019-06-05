@@ -17,7 +17,7 @@ spec:
   - host:
     http:
       paths:
-      - path: /pbw{{ .Values.user }}-ui  # This is the url path used to access the service externally.
+      - path: /{{ .Values.user }}  # This is the url path used to access the service externally.
         backend:
           serviceName: {{ .Release.Name }}-{{ .Chart.Name }} # This is the name of the service to be exposed.
           servicePort: {{ .Values.service.internalPort }}
