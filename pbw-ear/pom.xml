@@ -41,7 +41,7 @@
         <version>2.4</version>
         <configuration>
             <version>6</version>
-            <generateApplicationXml>false</generateApplicationXml>
+            <generateApplicationXml>true</generateApplicationXml>
             <modules>
               <jarModule>
                 <groupId>com.ibm.websphere.pbw</groupId>
@@ -53,6 +53,7 @@
                 <groupId>com.ibm.websphere.pbw</groupId>
                 <artifactId>pbw-web</artifactId>
                 <uri>pbw-web.war</uri>
+                <contextRoot>/${userName}</contextRoot>
               </webModule>
             </modules>
         </configuration>

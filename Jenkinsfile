@@ -3,7 +3,7 @@ def cloud = env.CLOUD ?: "kubernetes"
 def serviceAccount = env.SERVICE_ACCOUNT ?: "jnkns-for-cicd-lab-jenkins"
 def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials"
 def namespace = env.NAMESPACE ?: "default"
-def registry = env.REGISTRY ?: "mycluster.icp:8500" 
+def registry = env.REGISTRY ?: "mycluster.icp:8500"
 def majorPrefix = env.MAJOR_PREFIX ?: "1.0.0"
 
 // In this multiuser scenario  we derive user specific vars from the logged in Jenkins user
@@ -20,7 +20,8 @@ podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, names
         envVar(key: 'DEPLOYMENT_NS', value: deploymentNS),
         envVar(key: 'REGISTRY', value: registry),
         envVar(key: 'RELEASE_NAME', value: releaseName),
-        envVar(key: 'MAJOR_PREFIX', value: majorPrefix)
+        envVar(key: 'MAJOR_PREFIX', value: majorPrefix),
+        envVar(key: 'USERNAME', value: userName)
     ],
     volumes: [
         hostPathVolume(hostPath: '/etc/docker/certs.d', mountPath: '/etc/docker/certs.d'),
@@ -38,7 +39,7 @@ podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, names
             stage('Build application ear file') {
                sh """
                #!/bin/bash
-               mvn -B -DskipTests clean package
+               mvn -B -DskipTests -DuserName=${env.USERNAME} clean package
                """
             }
         }

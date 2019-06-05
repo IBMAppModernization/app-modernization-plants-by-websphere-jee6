@@ -1,4 +1,5 @@
 k8sNamespace: changeme
+user: default
 image:
   repository: djccarew/pbw-mysql
   name: pbw-mysql
