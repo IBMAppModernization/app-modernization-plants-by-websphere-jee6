@@ -30,7 +30,9 @@
             <type>war</type>
         </dependency>
   </dependencies>
-
+  <properties>
+    <userName></userName>
+  </properties>
   <build>
     <!--<finalName>pbw-ear</finalName> -->
     <finalName>plants-by-websphere-jee6-mysql</finalName>
@@ -42,6 +44,7 @@
         <configuration>
             <version>6</version>
             <generateApplicationXml>true</generateApplicationXml>
+
             <modules>
               <jarModule>
                 <groupId>com.ibm.websphere.pbw</groupId>
