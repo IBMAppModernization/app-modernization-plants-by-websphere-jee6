@@ -8,7 +8,6 @@ pipeline {
          MAJOR_PREFIX = "1.0.0"
          RELEASE_NAME = "pbw-liberty-mariadb"
          DEPLOYMENT_NS = "default"
-         REGION = "us-east"
     }
 
     tools {
