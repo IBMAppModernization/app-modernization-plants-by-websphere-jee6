@@ -28,6 +28,7 @@ pipeline {
                  echo "REGION = ${REGION}"
                  echo "RESOURCE_GROUP = ${RESOURCE_GROUP}"
                  echo "CLUSTER_NAME = ${CLUSTER_NAME}"
+                 echo "REGION = ${REGION}"
                 '''
             }
          }
