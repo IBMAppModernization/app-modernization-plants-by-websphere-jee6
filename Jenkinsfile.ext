@@ -25,19 +25,19 @@ pipeline {
                     echo "FATAL ERROR: CLUSTER_NAME undefined, exiting pipeline"
                     exit 22
                  else 
-                    echo "CLUSTER_NAME set to  ${CLUSTER_NAME}"
+                    echo "CLUSTER_NAME set to ${CLUSTER_NAME}"
                  fi
                  if [ -z "${REGISTRY_NS}"  ]; then
                     echo "FATAL ERROR: REGISTRY_NS undefined, exiting pipeline"
                     exit 22
                  else 
-                    echo "REGISTRY_NS set to  ${REGISTRY_NS}"
+                    echo "REGISTRY_NS set to ${REGISTRY_NS}"
                  fi
                  if [ -z "${REGION}"  ]; then
                     echo "FATAL ERROR: REGION undefined, exiting pipeline"
                     exit 22
                  else 
-                    echo "REGION set to  ${REGION}"
+                    echo "REGION set to ${REGION}"
                  fi
                  if [ -z "${RESOURCE_GROUP}"  ]; then
                     echo "FATAL ERROR: RESOURCE_GROUP undefined, exiting pipeline"
