@@ -75,7 +75,7 @@ pipeline {
                     eval \$(ibmcloud ks cluster-config --cluster ${env.CLUSTER_NAME} --export)
                     DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
                     kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
-                    if [ \$? -ne "0" ]; then
+                    if [ "\$?" -ne "0" ]; then
                         # No deployment to update
                         echo 'No deployment to update'
                         exit 1
