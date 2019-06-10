@@ -74,7 +74,7 @@ pipeline {
                     ibmcloud login --apikey ${PASSWORD} -r ${env.REGION} -g ${env.RESOURCE_GROUP}
                     eval \$(ibmcloud ks cluster-config --cluster ${env.CLUSTER_NAME} --export)
                     DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
-                    if [ "\${DEPLOYMENT}" = "" ]; then
+                    if [[ "\$DEPLOYMENT" = "" ]]; then
                         # No deployment to update
                         echo 'No deployment to update'
                         exit 1
