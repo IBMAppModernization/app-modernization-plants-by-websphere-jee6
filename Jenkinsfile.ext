@@ -45,22 +45,22 @@ pipeline {
                  else 
                     echo "RESOURCE_GROUP set to ${RESOURCE_GROUP}"
                  fi
-                 DEPLOYMENT_NS=`echo "${env.DEPLOYMENT_NS}"`
-                 if [ -z "\$DEPLOYMENT_NS"  ]; then
+              
+                 if [ -z "${DEPLOYMENT_NS}"  ]; then
                     echo "FATAL ERROR: DEPLOYMENT_NS undefined, exiting pipeline"
                     exit 22
                  else 
-                    echo "DEPLOYMENT_NS set to \${DEPLOYMENT_NS}"
+                    echo "DEPLOYMENT_NS set to ${DEPLOYMENT_NS}"
                  fi
-                 RELEASE_NAME=${env.RELEASE_NAME}
-                 if [ -z "\$RELEASE_NAME"  ]; then
+                
+                 if [ -z "${RELEASE_NAME}"  ]; then
                     echo "FATAL ERROR: RELEASE_NAME undefined, exiting pipeline"
                     exit 22
                  else 
                     echo "RELEASE_NAME set to ${RELEASE_NAME}"
                  fi
-                 REGISTRY_NS=${env.REGISTRY_NS}
-                 if [ -z "\$REGISTRY_NS"  ]; then
+                
+                 if [ -z "${REGISTRY_NS}"  ]; then
                     echo "FATAL ERROR: REGISTRY_NS undefined, exiting pipeline"
                     exit 22
                  else 
