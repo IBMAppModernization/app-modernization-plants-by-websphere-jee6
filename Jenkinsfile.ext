@@ -21,22 +21,22 @@ pipeline {
          stage ('Initialize') {
             steps {
                 sh '''#!/bin/bash
-                 if [ -z "${env.CLUSTER_NAME}"  ]; then
+                 if [ -z "${CLUSTER_NAME}"  ]; then
                     echo "FATAL ERROR: CLUSTER_NAME undefined, exiting pipeline"
                  else 
                     echo "CLUSTER_NAME set to  ${CLUSTER_NAME}"
                  fi
-                 if [ -z "${env.REGISTRY_NS}"  ]; then
+                 if [ -z "${REGISTRY_NS}"  ]; then
                     echo "FATAL ERROR: REGISTRY_NS undefined, exiting pipeline"
                  else 
                     echo "REGISTRY_NS set to  ${REGISTRY_NS}"
                  fi
-                 if [ -z "${env.REGION}"  ]; then
+                 if [ -z "${REGION}"  ]; then
                     echo "FATAL ERROR: REGION undefined, exiting pipeline"
                  else 
                     echo "REGION set to  ${REGION}"
                  fi
-                 if [ -z "${env.RESOURCE_GROUP}"  ]; then
+                 if [ -z "${RESOURCE_GROUP}"  ]; then
                     echo "FATAL ERROR: RESOURCE_GROUP undefined, exiting pipeline"
                  else 
                     echo "RESOURCE_GROUP set to  ${RESOURCE_GROUP}"
