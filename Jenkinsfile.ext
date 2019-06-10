@@ -20,8 +20,7 @@ pipeline {
     stages {
          stage ('Initialize') {
             steps {
-                sh '''
-                  #!/bin/bash
+                sh '''#!/bin/bash
                  echo "REGISTRY_URL = ${REGISTRY_URL}"
                  echo "REGISTRY_NS = ${REGISTRY_NS}"
                  echo "REGION = ${REGION}"
@@ -54,8 +53,7 @@ pipeline {
              withCredentials([usernamePassword(credentialsId: clusterCredsID,
                                           usernameVariable: 'USERNAME',
                                           passwordVariable: 'PASSWORD')]) {
-                 sh """
-                 #!/bin/bash
+                 sh """#!/bin/bash
                  docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY_URL}
                  docker push ${env.REGISTRY_URL}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
                  """
@@ -69,17 +67,15 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: clusterCredsID,
                                              usernameVariable: 'USERNAME',
                                              passwordVariable: 'PASSWORD')]) {
-                    sh """
-                    #!/bin/bash
+                    sh """#!/bin/bash
                     ibmcloud login --apikey ${PASSWORD} -r ${env.REGION} -g ${env.RESOURCE_GROUP}
                     eval \$(ibmcloud ks cluster-config --cluster ${env.CLUSTER_NAME} --export)
                     DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
-                    if [[ "\$DEPLOYMENT" == "" ]]; then
-                        # No deployment to update
-                        echo 'No deployment to update'
-                        exit 1
+                    if [ -z "\$DEPLOYMENT"  ]; then
+                       echo "ERROR: Deployment not found"
+                       exit 1
                     else
-                        echo 'Existing app deployment found'
+                       echo "Existing deployment found"
                     fi
                     kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
             
