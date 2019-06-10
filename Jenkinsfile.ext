@@ -72,10 +72,10 @@ pipeline {
                     eval \$(ibmcloud ks cluster-config --cluster ${env.CLUSTER_NAME} --export)
                     DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
                     if [ -z "\$DEPLOYMENT"  ]; then
-                       echo "ERROR: Deployment not found"
+                       echo "FATAL ERROR: Deployment not found, exiting pipeline"
                        exit 1
                     else
-                       echo "Existing deployment found"
+                       echo "Existing deployment found, uodating to point to image just created "
                     fi
                     kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
             
