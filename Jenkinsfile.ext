@@ -56,7 +56,7 @@ pipeline {
                                           passwordVariable: 'PASSWORD')]) {
                  sh """
                  #!/bin/bash
-                 docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY_URL}
+                 docker login -u iamapikey -p ${PASSWORD} ${env.REGISTRY_URL}
                  docker push ${env.REGISTRY_URL}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
                  """
              }
