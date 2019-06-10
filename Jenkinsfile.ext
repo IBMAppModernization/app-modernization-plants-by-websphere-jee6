@@ -43,7 +43,25 @@ pipeline {
                     echo "FATAL ERROR: RESOURCE_GROUP undefined, exiting pipeline"
                     exit 22
                  else 
-                    echo "RESOURCE_GROUP set to  ${RESOURCE_GROUP}"
+                    echo "RESOURCE_GROUP set to ${RESOURCE_GROUP}"
+                 fi
+                 if [ -z "${env.DEPLOYMENT_NS}"  ]; then
+                    echo "FATAL ERROR: DEPLOYMENT_NS undefined, exiting pipeline"
+                    exit 22
+                 else 
+                    echo "DEPLOYMENT_NS set to ${env.DEPLOYMENT_NS}"
+                 fi
+                 if [ -z "${env.RELEASE_NAME}"  ]; then
+                    echo "FATAL ERROR: RELEASE_NAME undefined, exiting pipeline"
+                    exit 22
+                 else 
+                    echo "RELEASE_NAME set to ${env.RELEASE_NAME}"
+                 fi
+                 if [ -z "${env.REGISTRY_NS}"  ]; then
+                    echo "FATAL ERROR: REGISTRY_NS undefined, exiting pipeline"
+                    exit 22
+                 else 
+                    echo "REGISTRY_NS set to ${env.REGISTRY_NS}"
                  fi
                 '''
             }
