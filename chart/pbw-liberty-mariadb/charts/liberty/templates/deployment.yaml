@@ -29,6 +29,8 @@ spec:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
         env:
+        - name: WEB_CONTEXT_ROOT
+          value: {{ .Values.webContextRoot }}
         - name: DB_USER
           valueFrom:
             secretKeyRef:

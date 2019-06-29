@@ -12,7 +12,6 @@
 	<modules>
 		<module>pbw-lib</module>
 		<module>pbw-web</module>
-		<module>pbw-ear</module>
 	</modules>
 
 	<build>

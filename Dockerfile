@@ -1,6 +1,8 @@
 #IMAGE: Get the base image for Liberty
 FROM websphere-liberty:webProfile7
 
+ENV WEB_CONTEXT_ROOT /
+
 # Add MariaDB Type 4 JDBC driver
 #RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
 #COPY docker/liberty/mariadb-java-client-1.7.4.jar /opt/ibm/wlp/usr/shared/resources/mariadb/
@@ -27,4 +29,4 @@ RUN /opt/ibm/wlp/bin/installUtility install --verbose  --acceptLicense \
 
 #BINARIES: Add in all necessary application binaries
 COPY wlp/server.xml /config
-ADD pbw-ear/target/plants-by-websphere-jee6-mysql.ear /opt/ibm/wlp/usr/servers/defaultServer/apps
+ADD pbw-web/target/plants-by-websphere-jee6-mysql.war /opt/ibm/wlp/usr/servers/defaultServer/apps

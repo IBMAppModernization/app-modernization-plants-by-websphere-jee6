@@ -42,11 +42,11 @@
             <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}" relaxAutoCommit="false"/>
             <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
         </dataSource>
-      
+
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
         <property name="mail.smtp.host" value="smtp.gmail.com"/>
     </mailSession>
 <applicationManager autoExpand="true"/>
-<application id="plants-by-websphere-jee6-mysql" name="plants-by-websphere-jee6-mysql" location="plants-by-websphere-jee6-mysql.ear"/>
+<webApplication context-root="${env.WEB_CONTEXT_ROOT}" location="plants-by-websphere-jee6-mysql.war"/>
 </server>

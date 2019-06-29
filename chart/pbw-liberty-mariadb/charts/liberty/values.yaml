@@ -1,5 +1,7 @@
 k8sNamespace: changeme
 user: default
+webContextRoot: "/"
+
 image:
   repository: djccarew/pbw-mysql
   name: pbw-mysql
