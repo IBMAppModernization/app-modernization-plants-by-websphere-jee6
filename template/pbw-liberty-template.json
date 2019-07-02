@@ -1,0 +1,267 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pbw-liberty",
+    "annotations": {
+      "iconClass": "icon-jboss",
+      "description": "Application template for PBW on Liberty & MariaDb built using S2I"
+    }
+  },
+  "labels": {
+    "application": "pbw-liberty-mariadb",
+    "createdBy": "carew@us.ibm.com"
+  },
+  "parameters": [{
+      "description": "The name for the application.",
+      "name": "APPLICATION_NAME",
+      "value": "pbw-liberty-mariadb"
+    },
+    {
+      "description": "Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
+      "name": "APPLICATION_HOSTNAME"
+    },
+    {
+      "description": "Namespace of S2I builder image",
+      "name": "S2I_BUILDER_NAMESPACE",
+      "value": "pbw-liberty-mariadb"
+    },
+    {
+      "description": "Git source URI for application",
+      "name": "GIT_URI",
+      "value": "https://github.com/IBMAppModernization/app-modernization-plants-by-websphere-jee6.git"
+    },
+    {
+      "description": "Git branch/tag reference",
+      "name": "GIT_REF",
+      "value": "master"
+    },
+    {
+      "description": "Name of database service",
+      "name": "PBW_DB_SERVICE",
+      "value": "mariadb"
+    },
+    {
+      "description": "Github trigger secret",
+      "name": "GITHUB_TRIGGER_SECRET",
+      "from": "[a-zA-Z0-9]{8}",
+      "generate": "expression"
+    },
+    {
+      "description": "Generic build trigger secret",
+      "name": "GENERIC_TRIGGER_SECRET",
+      "from": "[a-zA-Z0-9]{8}",
+      "generate": "expression"
+    }
+  ],
+  "objects": [{
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "triggers": [{
+            "type": "Generic",
+            "generic": {
+              "secret": "${GENERIC_TRIGGER_SECRET}"
+            }
+          },
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "${GITHUB_TRIGGER_SECRET}"
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "${GIT_URI}",
+            "ref": "${GIT_REF}"
+          }
+        },
+        "strategy": {
+          "type": "Source",
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "namespace": "${S2I_BUILDER_NAMESPACE}",
+              "name": "s2i-liberty-javaee7:latest"
+            }
+          }
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "${APPLICATION_NAME}:latest"
+          }
+        }
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "dockerImageRepository": "",
+        "tags": [{
+          "name": "latest"
+        }]
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "labels": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Recreate"
+        },
+        "triggers": [{
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${APPLICATION_NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "${APPLICATION_NAME}:latest"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "deploymentConfig": "${APPLICATION_NAME}"
+            }
+          },
+          "spec": {
+            "containers": [{
+                "name": "${APPLICATION_NAME}",
+                "image": "${APPLICATION_NAME}",
+                "ports": [{
+                    "name": "${APPLICATION_NAME}-http",
+                    "containerPort": 9080,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "${APPLICATION_NAME}-https",
+                    "containerPort": 9443,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "${APPLICATION_NAME}-debug",
+                    "containerPort": 7777,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [{
+                    "name": "DB_USER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "database-user",
+                        "name": "${PBW_DB_SERVICE}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DB_PORT",
+                    "value": "3306"
+                  },
+                  {
+                    "name": "DB_HOST",
+                    "value": "${PBW_DB_SERVICE}"
+                  },
+                  {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "database-password",
+                        "name": "${PBW_DB_SERVICE}"
+                      }
+                    }
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "300m",
+                    "memory": "250Mi"
+                  },
+                  "requests": {
+                    "cpu": "300m",
+                    "memory": "250Mi"
+                  }
+                }
+              },
+              "imagePullPolicy": "Always",
+              "securityContext": {
+                "capabilities": {},
+                "privileged": false
+              }
+            }],
+          "restartPolicy": "Always",
+          "dnsPolicy": "ClusterFirst"
+        }
+      }
+    }
+  },
+  {
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "${APPLICATION_NAME}",
+      "annotations": {
+        "description": "Route for application's http service"
+      }
+    },
+    "spec": {
+      "host": "${APPLICATION_HOSTNAME}",
+      "to": {
+        "kind": "Service",
+        "name": "${APPLICATION_NAME}"
+      }
+    }
+  },
+  {
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "${APPLICATION_NAME}",
+      "annotations": {
+        "description": "The app server's http port"
+      }
+    },
+    "spec": {
+      "ports": [{
+        "protocol": "TCP",
+        "port": 9080,
+        "targetPort": 9080
+      }],
+      "selector": {
+        "deploymentConfig": "${APPLICATION_NAME}"
+      }
+    }
+  }
+]
+}
