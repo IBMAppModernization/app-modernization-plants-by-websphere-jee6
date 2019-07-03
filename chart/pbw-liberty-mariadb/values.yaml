@@ -20,7 +20,7 @@ liberty:
       cpu: 300m
       memory: 250Mi
     requests:
-      cpu: 300m
+      cpu: 5m
       memory: 250Mi
 
 
@@ -38,7 +38,7 @@ ibm-mariadb-dev:
       cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 5m
       memory: 250Mi
   service:
     port: 3306
