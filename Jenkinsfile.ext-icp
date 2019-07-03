@@ -1,0 +1,92 @@
+// Basic Pipeline
+
+def clusterCredsID = env.CLUSTER_CREDENTIALS ?: "icp-credentials"
+def registryUrl = env.REGISTRY_URL ?: "mycluster.icp:8500"
+def userName = env.USERID ?: "anonymous"
+def releaseName = "pbw-liberty-mariadb-" + userName
+
+pipeline {
+    environment {
+         REGISTRY_URL = "${registryUrl}"
+         MAJOR_PREFIX = "1.0.0"
+         RELEASE_NAME = "pbw-liberty-mariadb-${userName}"
+         REGISTRY_NS = "${DEPLOYMENT_NS}"
+    }
+
+    tools {
+        maven 'Apache Maven 3.0.5'
+        jdk 'IBM JDK 8.0'
+    }
+
+    agent { label 's390x' }
+
+    stages {
+         stage ('Initialize') {
+            steps {
+                sh '''
+                  #!/bin/bash
+                 echo "REGISTRY_URL = ${REGISTRY_URL}"
+                 echo "DEPLOYMENT_NS = ${DEPLOYMENT_NS}"
+                 echo "USERID = ${USERID}"
+                 echo "RELEASE_NAME = ${RELEASE_NAME}"
+                '''
+            }
+         }
+
+        stage('Build application ear file') {
+          steps {
+              checkout scm
+              sh 'mvn clean package'
+          }
+        }
+
+       stage('Build Docker Image') {
+            steps {
+                script {
+                   echo "docker build -t ${REGISTRY_URL}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} ."
+                   sh 'sudo docker build -t ${REGISTRY_URL}/${REGISTRY_NS}/pbw-mariadb-web:${MAJOR_PREFIX}.${BUILD_NUMBER} .'
+                }
+
+            }
+       }
+
+       stage('Push Docker Image to Registry') {
+          steps {
+             withCredentials([usernamePassword(credentialsId: clusterCredsID,
+                                          usernameVariable: 'USERNAME',
+                                          passwordVariable: 'PASSWORD')]) {
+                 sh """
+                 #!/bin/bash
+                 sudo docker login -u ${USERNAME} -p ${PASSWORD} ${env.REGISTRY_URL}
+                 sudo docker push ${env.REGISTRY_URL}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+                 """
+             }
+           }
+       }
+       stage('Deploy new Docker Image') {
+            steps {
+                echo 'Deploying....'
+                withCredentials([usernamePassword(credentialsId: clusterCredsID,
+                                             usernameVariable: 'USERNAME',
+                                             passwordVariable: 'PASSWORD')]) {
+                    sh """#!/bin/bash
+                    cloudctl login -u ${USERNAME} -p ${PASSWORD} -n ${env.DEPLOYMENT_NS} -a ${env.CLUSTER_URL}                   
+                    DEPLOYMENT=`kubectl --namespace=${env.DEPLOYMENT_NS} get deployments -l app=pbw-liberty-mariadb,component=web-app,release=${env.RELEASE_NAME} --no-headers  -o name`
+                    if [ -z "\$DEPLOYMENT"  ]; then
+                       echo "FATAL ERROR: Deployment not found, exiting pipeline"
+                       exit 22
+                    else
+                       echo "Existing deployment found, updating to point to image just created "
+                    fi
+                    kubectl --namespace=${env.DEPLOYMENT_NS} get \${DEPLOYMENT} --no-headers -o custom-columns=":metadata.name"
+            
+                    # Update Deployment
+                    kubectl --namespace=${env.DEPLOYMENT_NS} set image \${DEPLOYMENT} ${env.RELEASE_NAME}-liberty=${env.REGISTRY_URL}/${env.REGISTRY_NS}/pbw-mariadb-web:${env.MAJOR_PREFIX}.${env.BUILD_NUMBER}
+                    kubectl --namespace=${env.DEPLOYMENT_NS} rollout status \${DEPLOYMENT}
+                    """
+                }
+
+            }
+        }
+    }
+}
