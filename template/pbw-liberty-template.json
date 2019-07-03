@@ -4,52 +4,71 @@
   "metadata": {
     "name": "pbw-liberty",
     "annotations": {
-      "iconClass": "icon-jboss",
-      "description": "Application template for PBW on Liberty & MariaDb built using S2I"
+      "openshift.io/display-name": "PBW Liberty Example App",
+      "description": "PBW Liberty Example App using MariaDB as the database",
+      "tags": "liberty,websphere",
+      "iconClass": "icon-php",
+      "openshift.io/provider-display-name": "IBM Client Dev Advocacy.",
+      "openshift.io/documentation-url": "https://github.com/IBMAppModernization/app-modernization-plants-by-websphere-jee6.git",
+      "openshift.io/support-url": "https://access.redhat.com"
     }
   },
   "labels": {
-    "application": "pbw-liberty-mariadb",
-    "createdBy": "carew@us.ibm.com"
+    "app": "pbw-liberty-mariadb"
   },
   "parameters": [{
-      "description": "The name for the application.",
       "name": "APPLICATION_NAME",
-      "value": "pbw-liberty-mariadb"
+      "displayName":"Application name",
+      "description": "The name for the application.",
+      "value": "pbw-liberty-mariadb",
+      "required": true
     },
     {
+      "name": "APPLICATION_HOSTNAME",
+      "displayName":"Application hostname",
       "description": "Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
-      "name": "APPLICATION_HOSTNAME"
+      "value": "",
+      "required": false
     },
     {
-      "description": "Namespace of S2I builder image",
       "name": "S2I_BUILDER_NAMESPACE",
-      "value": "pbw-liberty-mariadb"
+      "displayName":"S2I builder namespace",
+      "description": "Namespace of S2I builder image",
+      "value": "pbw-liberty-mariadb",
+      "required": true
     },
     {
-      "description": "Git source URI for application",
       "name": "GIT_URI",
-      "value": "https://github.com/IBMAppModernization/app-modernization-plants-by-websphere-jee6.git"
+      "description": "Git source URI for application",
+      "displayName": "Git source URI for application",
+      "value": "https://github.com/IBMAppModernization/app-modernization-plants-by-websphere-jee6.git",
+      "required": true
     },
     {
-      "description": "Git branch/tag reference",
       "name": "GIT_REF",
-      "value": "master"
+      "displayName": "Git branch/tag reference",
+      "description": "Git branch/tag reference",
+      "value": "openshift",
+      "required": true
     },
     {
-      "description": "Name of database service",
       "name": "PBW_DB_SERVICE",
-      "value": "mariadb"
+      "displayName": "Name of database service",
+      "description": "Name of database service",
+      "value": "mariadb",
+      "required": true
     },
     {
-      "description": "Github trigger secret",
       "name": "GITHUB_TRIGGER_SECRET",
+      "displayName": "Github trigger secret",
+      "description": "Github trigger secret",
       "from": "[a-zA-Z0-9]{8}",
       "generate": "expression"
     },
     {
-      "description": "Generic build trigger secret",
       "name": "GENERIC_TRIGGER_SECRET",
+      "displayName": "Generic build trigger secret",
+      "description": "Generic build trigger secret",
       "from": "[a-zA-Z0-9]{8}",
       "generate": "expression"
     }
@@ -125,6 +144,7 @@
           "deploymentConfig": "${APPLICATION_NAME}"
         }
       },
+      "template.alpha.openshift.io/wait-for-ready": "true",
       "spec": {
         "strategy": {
           "type": "Recreate"
@@ -158,61 +178,61 @@
           },
           "spec": {
             "containers": [{
-                "name": "${APPLICATION_NAME}",
-                "image": "${APPLICATION_NAME}",
-                "ports": [{
-                    "name": "${APPLICATION_NAME}-http",
-                    "containerPort": 9080,
-                    "protocol": "TCP"
-                  },
-                  {
-                    "name": "${APPLICATION_NAME}-https",
-                    "containerPort": 9443,
-                    "protocol": "TCP"
-                  },
-                  {
-                    "name": "${APPLICATION_NAME}-debug",
-                    "containerPort": 7777,
-                    "protocol": "TCP"
-                  }
-                ],
-                "env": [{
-                    "name": "DB_USER",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-user",
-                        "name": "${PBW_DB_SERVICE}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DB_PORT",
-                    "value": "3306"
-                  },
-                  {
-                    "name": "DB_HOST",
-                    "value": "${PBW_DB_SERVICE}"
-                  },
-                  {
-                    "name": "DB_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "database-password",
-                        "name": "${PBW_DB_SERVICE}"
-                      }
+              "name": "${APPLICATION_NAME}",
+              "image": "${APPLICATION_NAME}",
+              "ports": [{
+                  "name": "http",
+                  "containerPort": 9080,
+                  "protocol": "TCP"
+                },
+                {
+                  "name": "https",
+                  "containerPort": 9443,
+                  "protocol": "TCP"
+                },
+                {
+                  "name": "debug",
+                  "containerPort": 7777,
+                  "protocol": "TCP"
+                }
+              ],
+              "env": [{
+                  "name": "DB_USER",
+                  "valueFrom": {
+                    "secretKeyRef": {
+                      "key": "database-user",
+                      "name": "${PBW_DB_SERVICE}"
                     }
                   }
-                ],
-                "resources": {
-                  "limits": {
-                    "cpu": "300m",
-                    "memory": "250Mi"
-                  },
-                  "requests": {
-                    "cpu": "300m",
-                    "memory": "250Mi"
+                },
+                {
+                  "name": "DB_PORT",
+                  "value": "3306"
+                },
+                {
+                  "name": "DB_HOST",
+                  "value": "${PBW_DB_SERVICE}"
+                },
+                {
+                  "name": "DB_PASSWORD",
+                  "valueFrom": {
+                    "secretKeyRef": {
+                      "key": "database-password",
+                      "name": "${PBW_DB_SERVICE}"
+                    }
                   }
                 }
+              ],
+              "resources": {
+                "limits": {
+                  "cpu": "300m",
+                  "memory": "250Mi"
+                },
+                "requests": {
+                  "cpu": "300m",
+                  "memory": "250Mi"
+                }
+
               },
               "imagePullPolicy": "Always",
               "securityContext": {
@@ -220,48 +240,50 @@
                 "privileged": false
               }
             }],
-          "restartPolicy": "Always",
-          "dnsPolicy": "ClusterFirst"
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "annotations": {
+          "description": "Route for application's http service"
+        }
+      },
+      "template.alpha.openshift.io/wait-for-ready": "true",
+      "spec": {
+        "host": "${APPLICATION_HOSTNAME}",
+        "to": {
+          "kind": "Service",
+          "name": "${APPLICATION_NAME}"
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "annotations": {
+          "description": "The app server's http port"
+        }
+      },
+      "template.alpha.openshift.io/wait-for-ready": "true",
+      "spec": {
+        "ports": [{
+          "protocol": "TCP",
+          "port": 9080,
+          "targetPort": 9080
+        }],
+        "selector": {
+          "deploymentConfig": "${APPLICATION_NAME}"
         }
       }
     }
-  },
-  {
-    "kind": "Route",
-    "apiVersion": "v1",
-    "metadata": {
-      "name": "${APPLICATION_NAME}",
-      "annotations": {
-        "description": "Route for application's http service"
-      }
-    },
-    "spec": {
-      "host": "${APPLICATION_HOSTNAME}",
-      "to": {
-        "kind": "Service",
-        "name": "${APPLICATION_NAME}"
-      }
-    }
-  },
-  {
-    "kind": "Service",
-    "apiVersion": "v1",
-    "metadata": {
-      "name": "${APPLICATION_NAME}",
-      "annotations": {
-        "description": "The app server's http port"
-      }
-    },
-    "spec": {
-      "ports": [{
-        "protocol": "TCP",
-        "port": 9080,
-        "targetPort": 9080
-      }],
-      "selector": {
-        "deploymentConfig": "${APPLICATION_NAME}"
-      }
-    }
-  }
-]
+  ]
 }
