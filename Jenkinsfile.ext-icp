@@ -36,7 +36,7 @@ pipeline {
         stage('Build application ear file') {
           steps {
               checkout scm
-              sh 'mvn clean package'
+              sh 'mvn clean package -DuserName=${USERID}'
           }
         }
 
