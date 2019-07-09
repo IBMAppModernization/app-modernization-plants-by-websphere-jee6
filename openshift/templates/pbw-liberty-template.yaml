@@ -7,7 +7,7 @@ metadata:
     description: Plants by WebSphere on Liberty App using MariaDB as the database
     tags: liberty,websphere
     openshift.io/provider-display-name: IBM Client Dev Advocacy.
-    openshift.io/documentation-url: https://github.com/djccarew/app-modernization-plants-by-websphere-jee6.git
+    openshift.io/documentation-url: https://github.com/ibmappmodernization/app-modernization-plants-by-websphere-jee6.git
     openshift.io/support-url: https://access.redhat.com
 labels:
   app: pbw-liberty-mariadb

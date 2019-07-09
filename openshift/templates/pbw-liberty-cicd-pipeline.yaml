@@ -2,6 +2,13 @@ apiVersion:                               v1
 kind:                                     Template
 metadata:
   name:                                   pbw-cicd-pipeline
+  annotations:
+    openshift.io/display-name: Plants by WebSphere on Liberty CI/CD Pipeline
+    description: CI/CD Pipeline for Plants by WebSphere on Liberty App
+    tags: liberty,websphere
+    openshift.io/provider-display-name: IBM Client Dev Advocacy.
+    openshift.io/documentation-url: https://github.com/ibmappmodernization/app-modernization-plants-by-websphere-jee6.git
+    openshift.io/support-url: https://access.redhat.com
 parameters:
 - name:                                   APP_NAME
   description:                            The name assigned to all of the application objects defined in this template.
@@ -22,7 +29,7 @@ parameters:
   description:                            The source URL for the application
   displayName:                            Source URL
   required:                               true
-  value:                                  https://github.com/djccarew/app-modernization-plants-by-websphere-jee6.git
+  value:                                  https://github.com/changeme/app-modernization-plants-by-websphere-jee6.git
 - name:                                   GIT_SOURCE_REF
   description:                            The source Ref for the application
   displayName:                            Source Ref
@@ -51,6 +58,10 @@ objects:
         name:                             ${APP_NAME}
       name:                               ${APP_NAME}
     spec:
+      source:
+        git:
+          uri: "${GIT_SOURCE_URL}"
+        type: Git
       strategy:
         jenkinsPipelineStrategy:
           jenkinsfilePath:                Jenkinsfile.ocp

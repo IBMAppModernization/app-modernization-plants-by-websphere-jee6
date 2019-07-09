@@ -1,0 +1,56 @@
+// Basic OpenShift Pipeline - Uses an existing BuildConfig and a manually
+// triggered DeploymentConfig
+pipeline {
+  /* Which container to bring up for the build. Pick one of the templates configured in Kubernetes plugin. */
+  agent {
+    label 'maven'
+  }
+
+  stages {
+    stage("Checkout") {
+      steps {
+         git url: "${GIT_SOURCE_URL}", branch: "${GIT_SOURCE_REF}"
+      }
+    }
+    stage("Build EAR") {
+      steps {
+         sh "mvn clean package -Popenshift"
+      }
+    }
+    stage("Build Image") {
+      steps {
+
+        script {
+           openshift.withCluster() {
+               openshift.withProject() {
+                 def deployedAppName =  "${DEPLOYED_APP_NAME}"
+                 echo "Disabling ImageChange trigger on current deployment ..."
+                 def result = openshift.raw("set","triggers", "dc/${DEPLOYED_APP_NAME}","--manual")
+                 echo "set triggers return message: ${result.out}"
+                 echo "Starting build using BuildConfig ${deployedAppName} ..."
+                 openshift.selector("bc", deployedAppName).startBuild("--from-dir=.", "--wait")
+               }
+           }
+       }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        script {
+            openshift.withCluster() {
+                openshift.withProject() {
+                  def deployedAppName =  "${DEPLOYED_APP_NAME}"
+                  echo "Perform a rolling update of newly built image on current deployment ..."
+                  def rm = openshift.selector("dc",deployedAppName).rollout().latest()
+                  timeout(5) {
+                    openshift.selector("dc", deployedAppName).related('pods').untilEach(1) {
+                      return (it.object().status.phase == "Running")
+                    }
+                  }
+                }
+            }
+        }
+      }
+    }
+  }
+}
