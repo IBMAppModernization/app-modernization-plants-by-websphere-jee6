@@ -65,6 +65,13 @@ objects:
       strategy:
         jenkinsPipelineStrategy:
           jenkinsfilePath:                Jenkinsfile.ocp
+          env:
+            - name:  "GIT_SOURCE_URL"
+              value: "${GIT_SOURCE_URL}"
+            - name:  "GIT_SOURCE_REF"
+              value: "${GIT_SOURCE_REF}"
+            - name: "DEPLOYED_APP_NAME"
+              value: "${DEPLOYED_APP_NAME}"
         type:                             JenkinsPipeline
       triggers:
       - github:
