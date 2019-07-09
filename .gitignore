@@ -7,3 +7,7 @@
 .factorypath
 .project
 **/*.tgz
+
+# Allow
+!target/*.war
+!target/*.ear

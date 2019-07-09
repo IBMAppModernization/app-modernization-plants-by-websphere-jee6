@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ibm.websphere.pbw</groupId>
@@ -17,49 +15,74 @@
   </parent>
 
   <dependencies>
-        <dependency>
-            <groupId>com.ibm.websphere.pbw</groupId>
-            <artifactId>pbw-lib</artifactId>
-            <version>8.0</version>
-        </dependency>
+    <dependency>
+      <groupId>com.ibm.websphere.pbw</groupId>
+      <artifactId>pbw-lib</artifactId>
+      <version>8.0</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.ibm.websphere.pbw</groupId>
-            <artifactId>pbw-web</artifactId>
-            <version>8.0</version>
-            <type>war</type>
-        </dependency>
+    <dependency>
+      <groupId>com.ibm.websphere.pbw</groupId>
+      <artifactId>pbw-web</artifactId>
+      <version>8.0</version>
+      <type>war</type>
+    </dependency>
   </dependencies>
   <properties>
     <userName></userName>
   </properties>
   <build>
     <!--<finalName>pbw-ear</finalName> -->
-    <finalName>plants-by-websphere-jee6-mysql</finalName>
+    <!-- <finalName>plants-by-websphere-jee6-mysql</finalName> -->
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-ear-plugin</artifactId>
         <version>2.4</version>
         <configuration>
-            <version>6</version>
-            <generateApplicationXml>true</generateApplicationXml>
+          <version>6</version>
+          <generateApplicationXml>true</generateApplicationXml>
 
-            <modules>
-              <jarModule>
-                <groupId>com.ibm.websphere.pbw</groupId>
-                <artifactId>pbw-lib</artifactId>
-                <!-- force a lib directory location -->
-                <uri>lib/pbw-lib.jar</uri>
-              </jarModule>
-              <webModule>
-                <groupId>com.ibm.websphere.pbw</groupId>
-                <artifactId>pbw-web</artifactId>
-                <uri>pbw-web.war</uri>
-                <contextRoot>/${userName}</contextRoot>
-              </webModule>
-            </modules>
+          <modules>
+            <jarModule>
+              <groupId>com.ibm.websphere.pbw</groupId>
+              <artifactId>pbw-lib</artifactId>
+              <!-- force a lib directory location -->
+              <uri>lib/pbw-lib.jar</uri>
+            </jarModule>
+            <webModule>
+              <groupId>com.ibm.websphere.pbw</groupId>
+              <artifactId>pbw-web</artifactId>
+              <uri>pbw-web.war</uri>
+              <contextRoot>/${userName}</contextRoot>
+            </webModule>
+          </modules>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-artifact</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>${project.artifactId}</artifactId>
+                  <version>${project.version}</version>
+                  <type>${project.packaging}</type>
+                  <destFileName>plants-by-websphere-jee6-mysql.ear</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>../target</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

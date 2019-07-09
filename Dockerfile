@@ -7,7 +7,7 @@ FROM websphere-liberty:webProfile7
 
 # Add MySQL  Type 4 JDBC driver
 RUN mkdir /opt/ibm/wlp/usr/shared/resources/mysql
-COPY docker/liberty/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/resources/mysql/
+COPY wlp/usr/shared/resources/mysql/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/resources/mysql/
 
 
 # Install all required Liberty modules
@@ -26,5 +26,5 @@ RUN /opt/ibm/wlp/bin/installUtility install --verbose  --acceptLicense \
 	jpa-2.1
 
 #BINARIES: Add in all necessary application binaries
-COPY wlp/server.xml /config
-ADD pbw-ear/target/plants-by-websphere-jee6-mysql.ear /opt/ibm/wlp/usr/servers/defaultServer/apps
+COPY wlp/config/server.xml /config
+ADD target/plants-by-websphere-jee6-mysql.ear /opt/ibm/wlp/usr/servers/defaultServer/apps
