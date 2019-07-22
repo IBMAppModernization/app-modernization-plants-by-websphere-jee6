@@ -20,11 +20,6 @@ parameters:
   displayName:                            Deployed Application Name
   required:                               true
   value:                                  pbw-liberty-mariadb
-- name:                                   DEPLOYED_APP_PROJECT
-  description:                            The project  of the deployed application.
-  displayName:                            Deployed Application Project
-  required:                               true
-  value:                                  pbw-liberty-mariadb
 - name:                                   GIT_SOURCE_URL
   description:                            The source URL for the application
   displayName:                            Source URL
