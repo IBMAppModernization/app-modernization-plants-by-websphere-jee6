@@ -22,11 +22,6 @@ parameters:
   description: 'Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>'
   value: ''
   required: false
-- name: S2I_BUILDER_NAMESPACE
-  displayName: S2I builder namespace
-  description: Namespace of S2I builder image
-  value: pbw-liberty-mariadb
-  required: true
 - name: GIT_URI
   description: Git source URI for application
   displayName: Git source URI for application
@@ -65,18 +60,15 @@ objects:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          namespace: "${S2I_BUILDER_NAMESPACE}"
           name: s2i-liberty-javaee7:1.0
     output:
       to:
         kind: ImageStreamTag
-        namespace: "${S2I_BUILDER_NAMESPACE}"
         name: "${APPLICATION_NAME}:latest"
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
     name: "${APPLICATION_NAME}"
-    namespace: "${S2I_BUILDER_NAMESPACE}"
   spec:
     lookupPolicy:
       local: false
@@ -164,6 +156,8 @@ objects:
       description: Route for application's http service
   spec:
     host: "${APPLICATION_HOSTNAME}"
+    tls:
+      termination: edge
     to:
       kind: Service
       name: "${APPLICATION_NAME}"
