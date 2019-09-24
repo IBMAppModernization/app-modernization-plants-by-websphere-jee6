@@ -1,5 +1,5 @@
 #IMAGE: Get the base image for Liberty
-FROM websphere-liberty:webProfile7
+FROM websphere-liberty:javaee7
 
 # Add MariaDB Type 4 JDBC driver
 #RUN mkdir /opt/ibm/wlp/usr/shared/resources/mariadb
@@ -8,6 +8,10 @@ FROM websphere-liberty:webProfile7
 # Add MySQL  Type 4 JDBC driver
 RUN mkdir /opt/ibm/wlp/usr/shared/resources/mysql
 COPY wlp/usr/shared/resources/mysql/mysql-connector-java-5.1.38.jar /opt/ibm/wlp/usr/shared/resources/mysql/
+
+# Add Hazelcast jar
+RUN mkdir /opt/ibm/wlp/usr/shared/resources/hazelcast
+COPY wlp/usr/shared/resources/hazelcast/hazelcast-3.12.1.jar /opt/ibm/wlp/usr/shared/resources/hazelcast/
 
 
 # Install all required Liberty modules
@@ -23,7 +27,8 @@ RUN /opt/ibm/wlp/bin/installUtility install --verbose  --acceptLicense \
   cdi-1.2 \
 	javaMail-1.5 \
   el-3.0 \
-	jpa-2.1
+	jpa-2.1 \
+	sessionCache-1.0
 
 #BINARIES: Add in all necessary application binaries
 COPY wlp/config/server.xml /config

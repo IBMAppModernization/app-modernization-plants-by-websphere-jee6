@@ -15,6 +15,7 @@
 <feature>jpa-2.1</feature>
 <feature>javaMail-1.5</feature>
 <feature>el-3.0</feature>
+<feature>sessionCache-1.0</feature>
 </featureManager>
 <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 <!-- <variable name="MARIADB_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mariadb/" />
@@ -31,6 +32,13 @@
         <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource> -->
+    <!-- reference the library containing a JCache implementation -->
+<httpSessionCache libraryRef="JCacheLib"/>
+
+     <!-- In this example we are using Hazelcast as the JCache implementation -->
+<library id="JCacheLib">
+    <file name="/opt/ibm/wlp/usr/shared/resources/hazaelcast/hazelcast-3.12.1.jar"/>
+</library>
 
 <variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
     <jdbcDriver id="MySQL 5.1.38.1" javax.sql.DataSource="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
@@ -42,7 +50,7 @@
             <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}" relaxAutoCommit="false"/>
             <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
         </dataSource>
-      
+
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
         <property name="mail.smtp.host" value="smtp.gmail.com"/>

@@ -117,9 +117,19 @@ objects:
           - name: https
             containerPort: 9443
             protocol: TCP
+          - name: hazelcast
+            containerPort: 5701
+            protocol: TCP
           - name: debug
             containerPort: 7777
             protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /monitoring/alive
+              port: 9080
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
           env:
           - name: DB_USER
             valueFrom:
