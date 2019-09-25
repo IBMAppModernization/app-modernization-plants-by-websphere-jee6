@@ -25,7 +25,11 @@ parameters:
 - name: GIT_URI
   description: Git source URI for application
   displayName: Git source URI for application
-
+  required: true
+- name: GIT_BRANCH
+  description: Git source branch for application
+  displayName: Git source branch for application
+  value: 'master'
   required: true
 - name: PBW_DB_SERVICE
   displayName: Name of database service
@@ -55,6 +59,7 @@ objects:
       type: Git
       git:
         uri: "${GIT_URI}"
+        ref: "${GIT_BRANCH}"
     strategy:
       type: Docker
       dockerStrategy:
@@ -125,7 +130,7 @@ objects:
             protocol: TCP
           readinessProbe:
             httpGet:
-              path: /monitoring/alive
+              path: /servlet/ready
               port: 9080
             initialDelaySeconds: 5
             timeoutSeconds: 1

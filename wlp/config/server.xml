@@ -37,7 +37,7 @@
 
      <!-- In this example we are using Hazelcast as the JCache implementation -->
 <library id="JCacheLib">
-    <file name="/opt/ibm/wlp/usr/shared/resources/hazaelcast/hazelcast-3.12.1.jar"/>
+    <file name="/opt/ibm/wlp/usr/shared/resources/hazelcast/hazelcast-3.12.1.jar"/>
 </library>
 
 <variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
