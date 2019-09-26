@@ -30,16 +30,16 @@ public class InfoBean implements Serializable {
 
   public InfoBean () {
     super();
+  }
+
+  public String getServerAddress() {
     try {
        InetAddress localhost = InetAddress.getLocalHost();
        serverAddress = localhost.getHostAddress().trim();
     }
     catch (UnknownHostException e) {
-      System.err.println("Fatal error: cannot instantiate IPAddressBean : " + e.getMessage());
+      System.err.println("Fatal error: cannot get  IP Address from InfoBean : " + e.getMessage());
     }
-  }
-
-  public String getServerAddress() {
 		return serverAddress;
 	}
 
