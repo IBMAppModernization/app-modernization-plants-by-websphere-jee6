@@ -22,6 +22,11 @@ parameters:
   description: 'Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>'
   value: ''
   required: false
+- name: REPLICAS
+  description: Number of replicas to spin up
+  displayName: Number of replicas to spin up
+  value: '1'
+  required: true
 - name: GIT_URI
   description: Git source URI for application
   displayName: Git source URI for application
@@ -104,7 +109,7 @@ objects:
            kind: ImageStreamTag
            name: "${APPLICATION_NAME}:latest"
      - type: ConfigChange
-    replicas: 1
+    replicas: ${REPLICAS}
     selector:
       deploymentConfig: "${APPLICATION_NAME}"
     template:
@@ -132,8 +137,8 @@ objects:
             httpGet:
               path: /servlet/ready
               port: 9080
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
             periodSeconds: 10
           env:
           - name: DB_USER

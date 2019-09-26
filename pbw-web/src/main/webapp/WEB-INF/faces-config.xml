@@ -10,10 +10,11 @@
 		<managed-bean-class>pagecode.Help</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-    <!-- 
+
+    <!--
     <factory>
     	<exception-handler-factory>javax.faces.webapp.PreJsf2ExceptionHandlerFactory</exception-handler-factory>
     </factory>
      -->
-    
+
 </faces-config>
