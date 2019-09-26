@@ -2,17 +2,17 @@
 /* -------------------------------- */
 
 /*
- * COPYRIGHT LICENSE: This information contains sample code provided in source code form. You may copy, 
- * modify, and distribute these sample programs in any form without payment to IBM for the purposes of 
- * developing, using, marketing or distributing application programs conforming to the application 
- * programming interface for the operating platform for which the sample code is written. 
- * Notwithstanding anything to the contrary, IBM PROVIDES THE SAMPLE SOURCE CODE ON AN "AS IS" BASIS 
- * AND IBM DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED 
- * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE, 
- * TITLE, AND ANY WARRANTY OR CONDITION OF NON-INFRINGEMENT. IBM SHALL NOT BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR OPERATION OF THE 
- * SAMPLE SOURCE CODE. IBM HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS 
- * OR MODIFICATIONS TO THE SAMPLE SOURCE CODE.  
+ * COPYRIGHT LICENSE: This information contains sample code provided in source code form. You may copy,
+ * modify, and distribute these sample programs in any form without payment to IBM for the purposes of
+ * developing, using, marketing or distributing application programs conforming to the application
+ * programming interface for the operating platform for which the sample code is written.
+ * Notwithstanding anything to the contrary, IBM PROVIDES THE SAMPLE SOURCE CODE ON AN "AS IS" BASIS
+ * AND IBM DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED
+ * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE,
+ * TITLE, AND ANY WARRANTY OR CONDITION OF NON-INFRINGEMENT. IBM SHALL NOT BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR OPERATION OF THE
+ * SAMPLE SOURCE CODE. IBM HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS
+ * OR MODIFICATIONS TO THE SAMPLE SOURCE CODE.
  *
  * (C) COPYRIGHT International Business Machines Corp., 2000,2011
  * All Rights Reserved * Licensed Materials - Property of IBM
@@ -202,7 +202,7 @@ TABLE.banner {
 	padding: 0px;
 	width: 100%;
 }
-	
+
 TABLE.footer {
 	border-spacing: 0px;
 	padding: 5px;
@@ -250,7 +250,7 @@ TH.promos		{ font-family : Verdana, Arial, Helvetica, sans-serif;
 			  padding-left : 4px;
                           color : "#ffffff";
 			  text-align : left;
- 
+
                          background-color: #669966;}
 
 
@@ -288,13 +288,13 @@ TD.cartitemright   		{ font-family : Verdana, Arial, Helvetica, sans-serif;
 TD.promos	        { padding : 2px;
 			  padding-left : 4px;
                           padding-bottom : 4px;
- 
+
                          background-color: #DCEBCD;}
 
 TD.trail	        { padding-left : 14px;}
 
 
-TR.cartitem { background-color : #ffffdd;}	
+TR.cartitem { background-color : #ffffdd;}
 TH.cartitem { background-color : #eeeecc;}
 TR.carttitle { font-size : 14pt;
 			  font-family : Verdana, Arial, Helvetica, sans-serif;
@@ -319,3 +319,11 @@ TT			{ font-family : Courier;}
 CENTER			{ text-align : center;}
 
 HR {width: 100%; color: black; height: 1px; shade:no-shade; position: relative}
+
+/* Span Propeties */
+
+SPAN.footer                { font-family : Verdana, Arial, Helvetica, sans-serif;
+
+                          font-size : .7em;
+                          color : #666666;}
+													
