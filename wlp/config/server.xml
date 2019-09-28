@@ -6,7 +6,7 @@
 <feature>jsp-2.3</feature>
 <feature>ejbLite-3.2</feature>
 <feature>ejbRemote-3.2</feature>
-<feature>servlet-3.1</feature>
+<feature>servlet-4.0</feature>
 <feature>jsf-2.2</feature>
 <feature>beanValidation-1.1</feature>
 <feature>jndi-1.0</feature>
