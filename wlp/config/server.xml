@@ -10,7 +10,7 @@
 <feature>jsf-2.3</feature>
 <feature>beanValidation-2.0</feature>
 <feature>jndi-1.0</feature>
-<feature>jdbc-4.3</feature>
+<feature>jdbc-4.2</feature>
 <feature>cdi-2.0</feature>
 <feature>jpa-2.2</feature>
 <feature>javaMail-1.6</feature>
