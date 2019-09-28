@@ -33,7 +33,7 @@
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource> -->
     <!-- reference the library containing a JCache implementation -->
-<httpSessionCache libraryRef="JCacheLib">
+<httpSessionCache libraryRef="JCacheLib" uri="file:/opt/ibm/wlp/usr/shared/config/hazelcast/hazelcast.xml">
    <properties hazelcast.config.location="file:/opt/ibm/wlp/usr/shared/config/hazelcast/hazelcast.xml"/>
 </httpSessionCache>
 
