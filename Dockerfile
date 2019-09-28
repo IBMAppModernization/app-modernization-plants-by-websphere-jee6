@@ -8,6 +8,13 @@ USER root
 RUN chown 1001:0 /opt/ibm/wlp/usr/shared/resources/mysql/*.jar
 USER 1001
 
+# Add Hazelcast config
+RUN mkdir opt/ibm/wlp/usr/shared/config/hazelcast
+COPY wlp/usr/shared/config/hazelcast/*.xml /opt/ibm/wlp/usr/shared/config/hazelcast/
+USER root
+RUN chown 1001:0 /opt/ibm/wlp/usr/shared/config/hazelcast/*.xml
+USER 1001
+
 # Add Hazelcast jar
 RUN mkdir /opt/ibm/wlp/usr/shared/resources/hazelcast
 COPY wlp/usr/shared/resources/hazelcast/*.jar /opt/ibm/wlp/usr/shared/resources/hazelcast/
