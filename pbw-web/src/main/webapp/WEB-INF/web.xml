@@ -20,15 +20,12 @@
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 	</servlet>
-	<error-page>
-    <error-code>500</error-code>
-    <location>/500error.jsp</location>
-  </error-page>
-	<error-page>
+<!--	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
 		<location>/viewExpired.xhtml</location>
-	</error-page>
+	</error-page> -->
 	<error-page>
+	  <error-code>500</error-code>
 		<location>/error.jsp</location>
 	</error-page>
 	<servlet-mapping>
