@@ -61,7 +61,7 @@ public class ShoppingBean implements Serializable {
 	private LinkedList<ProductBean> products;
 	private float shippingCost;
 
-	@EJB
+	@Inject
 	private ShoppingCartBean shoppingCart;
 
 	public String performAddToCart () {

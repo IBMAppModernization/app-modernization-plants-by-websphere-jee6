@@ -4,7 +4,11 @@
 	version="3.0">
 	<display-name>PlantsByWebSphere</display-name>
 	<distributable/>
-
+	<env-entry>
+	    <env-entry-name>jsf/ClientSideSecretKey</env-entry-name>
+	    <env-entry-type>java.lang.String</env-entry-type>
+	    <env-entry-value>t9hon817RnFNuHRTdgTbKwSdva4uKtPkIorPeO1Q5zo=</env-entry-value>
+	</env-entry>
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<!-- Setting a value of Development or UnitTest will enable debug mode in the application. -->
@@ -12,7 +16,7 @@
 	</context-param>
   <context-param>
 	    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-	    <param-value>server</param-value>
+	    <param-value>client</param-value>
 	</context-param>
 	<context-param>
 		<param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
