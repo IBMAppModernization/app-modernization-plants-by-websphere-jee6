@@ -5,7 +5,6 @@
     <join>
       <multicast enabled="false"/>
       <kubernetes enabled="true">
-        <namespace>testpbw</namespace>
         <service-name>hazelcast-service</service-name>
       </kubernetes>
     </join>

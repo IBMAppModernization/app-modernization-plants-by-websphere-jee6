@@ -33,14 +33,13 @@
         <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
     </dataSource> -->
     <!-- reference the library containing a JCache implementation -->
-<httpSessionCache libraryRef="JCacheLib" uri="file:/opt/ibm/wlp/usr/shared/config/hazelcast/hazelcast.xml">
-   <properties hazelcast.config.location="file:/opt/ibm/wlp/usr/shared/config/hazelcast/hazelcast.xml"/>
-</httpSessionCache>
+    <httpSessionCache libraryRef="JCacheLib" uri="file:/opt/ibm/wlp/usr/shared/config/hazelcast/hazelcast.xml" />
 
-     <!-- In this example we are using Hazelcast as the JCache implementation -->
-<library id="JCacheLib">
-    <file name="/opt/ibm/wlp/usr/shared/resources/hazelcast/hazelcast-all-3.12.2.jar"/>
-</library>
+
+    <!-- In this example we are using Hazelcast as the JCache implementation -->
+    <library id="JCacheLib">
+        <file name="/opt/ibm/wlp/usr/shared/resources/hazelcast/hazelcast-all-3.12.2.jar"/>
+    </library>
 
 <variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
     <jdbcDriver id="MySQL 5.1.38.1" javax.sql.DataSource="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
@@ -55,10 +54,6 @@
         <!-- reference the library containing a JCache implementation -->
       <httpSessionCache libraryRef="JCacheLib"/>
 
-           <!-- In this example we are using Hazelcast as the JCache implementation -->
-      <library id="JCacheLib">
-          <file name="/opt/ibm/wlp/usr/shared/resources/hazelcast/hazelcast-all-3.12.2.jar"/>
-      </library>
 
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
