@@ -70,7 +70,7 @@ objects:
       dockerStrategy:
         from:
           kind: ImageStreamTag
-          name: websphere-liberty:javaee7
+          name: websphere-liberty:kernel
     output:
       to:
         kind: ImageStreamTag
