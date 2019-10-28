@@ -120,6 +120,13 @@ objects:
           - name: debug
             containerPort: 7777
             protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /servlet/ready
+              port: 9080
+            initialDelaySeconds: 20
+            timeoutSeconds: 2
+            periodSeconds: 10
           env:
           - name: DB_USER
             valueFrom:
