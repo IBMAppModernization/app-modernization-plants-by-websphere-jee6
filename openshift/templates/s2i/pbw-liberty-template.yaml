@@ -25,7 +25,7 @@ parameters:
 - name: GIT_URI
   description: Git source URI for application
   displayName: Git source URI for application
-  value: https://github.com/changeme/app-modernization-plants-by-websphere-jee6.git
+  value: https://github.com/IBMAppModernization/app-modernization-plants-by-websphere-jee6.git
   required: true
 - name: PBW_DB_SERVICE
   displayName: Name of database service
