@@ -5,13 +5,10 @@ pipeline {
   agent any
 
   stages {
-    stage("Checkout") {
-      steps {
-         git url: "${env.GIT_SOURCE_URL}", branch: "${env.GIT_SOURCE_REF}"
-      }
-    }
+   
     stage("Build EAR") {
       steps {
+         scm checkout
          sh "mvn clean package -Popenshift"
       }
     }
