@@ -4,7 +4,7 @@ pipeline {
   /* Which container to bring up for the build. Pick one of the templates configured in Kubernetes plugin. */
   
   tools {
-        maven 'Apache Maven 3.5.2'
+        maven 'Apache Maven 3.0.5'
         jdk 'Open JDK 8'
     }
 
