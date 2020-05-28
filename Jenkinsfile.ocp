@@ -6,6 +6,7 @@ pipeline {
   tools {
         maven 'Apache Maven 3.0.5'
         jdk 'Open JDK 8'
+        oc 'oc'
     }
 
   agent any
