@@ -2,14 +2,19 @@
 // triggered DeploymentConfig
 pipeline {
   /* Which container to bring up for the build. Pick one of the templates configured in Kubernetes plugin. */
+  
+  tools {
+        maven 'Apache Maven 3.5.2'
+        jdk 'Open JDK 8'
+    }
+
   agent any
 
-  stages {
-   
+  stages {   
     stage("Build EAR") {
       steps {
          scm checkout
-         sh "mvn clean package -Popenshift"
+         sh "mvn clean package"
       }
     }
     stage("Build Image") {
