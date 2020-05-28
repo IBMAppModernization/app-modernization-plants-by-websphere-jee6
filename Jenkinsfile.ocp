@@ -13,7 +13,7 @@ pipeline {
   stages {   
     stage("Build EAR") {
       steps {
-         scm checkout
+         checkout scm
          sh "mvn clean package"
       }
     }
