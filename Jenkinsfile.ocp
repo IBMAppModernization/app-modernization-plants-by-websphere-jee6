@@ -43,6 +43,7 @@ pipeline {
                   def deployedAppName =  "${env.DEPLOYED_APP_NAME}"
                   echo "Perform a rolling update of newly built image on current deployment ..."
                   def rm = openshift.selector("dc",deployedAppName).rollout().latest()
+                  sleep 20
                   timeout(5) {
                     openshift.selector("dc", deployedAppName).related('pods').untilEach(1) {
                       return (it.object().status.phase == "Running")
