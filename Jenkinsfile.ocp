@@ -2,9 +2,7 @@
 // triggered DeploymentConfig
 pipeline {
   /* Which container to bring up for the build. Pick one of the templates configured in Kubernetes plugin. */
-  agent {
-    label 'maven'
-  }
+  agent any
 
   stages {
     stage("Checkout") {
